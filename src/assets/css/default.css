@@ -141,16 +141,16 @@
 	margin-bottom: 30px;
 }
 .mb-35 {
-	margin-bottom: 35px;
+	margin-bottom: 35px !important;
 }
 .mb-40 {
-	margin-bottom: 40px;
+	margin-bottom: 40px !important;
 }
 .mb-45 {
 	margin-bottom: 45px;
 }
 .mb-50 {
-	margin-bottom: 50px;
+	margin-bottom: 50px !important;
 }
 .mb-55 {
 	margin-bottom: 55px;

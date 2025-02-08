@@ -1,5 +1,4 @@
-
-import  { Component,  ReactNode } from 'react';
+import { Component, ReactNode } from 'react';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -15,24 +14,28 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     super(props);
     this.state = {
       hasError: false,
+      error: undefined, // Initialize error as undefined
     };
   }
-  
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+  static getDerivedStateFromError(error: Error): Partial<ErrorBoundaryState> {
     return {
       hasError: true,
-      error,
+      error, // Set the error in state
     };
   }
-  
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    // You can log the error to an error reporting service
+    console.error("Error caught in ErrorBoundary:", error, errorInfo);
+  }
+
   render(): ReactNode {
-    //console.log('error',this.state)
     if (this.state.hasError) {
       return (
         <div>
           <h1>Oops! Something went wrong.</h1>
-          {/* <p>Error details: {this.state.error?.message}</p> */}
+          {this.state.error && <p>Error details: {this.state.error.message}</p>}
         </div>
       );
     }

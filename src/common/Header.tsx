@@ -6,6 +6,27 @@ import { CardMedia } from "@mui/material";
 const Header = () => {
   return (
     <>
+      {/* <!-- preloader --> */}
+      {/* <div id="preloader">
+        <div className="preloader">
+          <span></span>
+          <span></span>
+        </div>
+      </div> */}
+      {/* <!-- preloader end  --> */}
+
+      {/* <!-- back to top start --> */}
+      {/* <div className="progress-wrap">
+        <svg
+          className="progress-circle svg-content"
+          width="100%"
+          height="100%"
+          viewBox="-1 -1 102 102"
+        >
+          <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+      </div> */}
+      {/* <!-- back to top end --> */}
       <AppSnackBar />
       <header>
         <div className="tp-header-area-three header-sticky">
@@ -15,10 +36,10 @@ const Header = () => {
                 <div className="tp-header-logo-three">
                   <Link to="/">
                     <CardMedia
-                    component="img"
-                    image="./logo.png"
-                    alt="Logo"
-                    sx={{width:'150px'}}
+                      component="img"
+                      image="./logo.png"
+                      alt="Logo"
+                      sx={{ width: "120px" }}
                     />
                   </Link>
                 </div>
@@ -37,29 +58,29 @@ const Header = () => {
                         <Link to="/about-us">About</Link>
                       </li>
                       <li className="menu-item-has-children">
-                        <Link to="/service">Services</Link>
-                        <ul className="sub-menu">
+                        <Link to="/services">Services</Link>
+                        {/* <ul className="sub-menu">
                           <li>
                             <Link to="/service">Services</Link>
                           </li>
                           <li>
                             <Link to="/service-details">Services Details</Link>
                           </li>
-                        </ul>
+                        </ul> */}
                       </li>
                       <li className="menu-item-has-children">
-                        <Link to="/blog-sidebar">Blog</Link>
-                        <ul className="sub-menu">
+                        <Link to="/blogs">Blog</Link>
+                        {/* <ul className="sub-menu">
                           <li>
                             <Link to="/blog-sidebar">Blog Sidebar</Link>
                           </li>
                           <li>
                             <Link to="/blog-details">Blog Details</Link>
                           </li>
-                        </ul>
+                        </ul> */}
                       </li>
                       <li>
-                        <Link to="/contact">Contact</Link>
+                        <Link to="/contact-us">Contact</Link>
                       </li>
                     </ul>
                   </nav>
@@ -79,9 +100,9 @@ const Header = () => {
                     </span>
                   </div>
                   <div className="tp-header-btn-three">
-                    <a href="contact.html" className="yellow-btn">
+                    <Link to="/contact-us" className="yellow-btn">
                       <i className="flaticon-enter"></i> Free Quote
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom";
-import frontendRoutes from "./frontend/routes";
+import frontendRoutes from "./common/routes";
 import Loader from "./common/Loader";
 
 function App() {

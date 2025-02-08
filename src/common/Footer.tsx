@@ -3,12 +3,12 @@ import {
   Button,
   CardMedia,
   Container,
-  Grid2,
+  Grid,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import FooterBlog1 from '../assets/img/footer/footer-blog-1.png';
-import FooterBlog2 from '../assets/img/footer/footer-blog-2.png';
+import FooterBlog1 from "../assets/img/footer/footer-blog-1.png";
+import FooterBlog2 from "../assets/img/footer/footer-blog-2.png";
 
 const Footer = () => {
   return (
@@ -16,9 +16,9 @@ const Footer = () => {
       {/* Footer Area */}
       <Box className="tp-footer-area-two pt-160 pb-70">
         <Container>
-          <Grid2 container spacing={2}>
+          <Grid container spacing={2}>
             {/* Column 1 */}
-            <Grid2 xs={12} sm={6} lg={3}>
+            <Grid xs={12} sm={6} lg={4}>
               <Box
                 className="tp-footer-widget footer-col-1 mb-30 wow fadeInUp"
                 data-wow-delay=".3s"
@@ -30,7 +30,7 @@ const Footer = () => {
                         component="img"
                         image="./logo.png"
                         alt="Logo"
-                        sx={{ width: '150px'}}
+                        sx={{ width: "150px" }}
                       />
                     </Link>
                   </Box>
@@ -54,10 +54,10 @@ const Footer = () => {
                   </Box>
                 </Box>
               </Box>
-            </Grid2>
+            </Grid>
 
             {/* Column 2 */}
-            <Grid2 xs={12} sm={6} lg={3}>
+            <Grid xs={12} sm={6} lg={4}>
               <Box
                 className="tp-footer-widget footer-col-2 mb-30 wow fadeInUp"
                 data-wow-delay=".6s"
@@ -86,10 +86,10 @@ const Footer = () => {
                   </li>
                 </ul>
               </Box>
-            </Grid2>
+            </Grid>
 
             {/* Column 3 */}
-            <Grid2 xs={12} sm={6} lg={3}>
+            <Grid xs={12} sm={6} lg={4}>
               <Box
                 className="tp-footer-widget mb-30 wow fadeInUp"
                 data-wow-delay=".9s"
@@ -145,10 +145,10 @@ const Footer = () => {
                   </Box>
                 </Box>
               </Box>
-            </Grid2>
+            </Grid>
 
             {/* Column 4 */}
-            <Grid2 xs={12} sm={6} lg={3}>
+            {/* <Grid xs={12} sm={6} lg={3}>
               <Box
                 className="tp-footer-widget footer-col-4 mb-30 wow fadeInUp"
                 data-wow-delay="1.2s"
@@ -177,24 +177,41 @@ const Footer = () => {
                   </form>
                 </Box>
               </Box>
-            </Grid2>
-          </Grid2>
+            </Grid> */}
+          </Grid>
         </Container>
       </Box>
 
       {/* Copyright Area */}
       <Box className="tp-copyright-area-two theme-dark-bg3 z-index pt-30 pb-30">
         <Container>
-          <Grid2 container>
-            <Grid2 size={12}>
+          <Grid container justifyContent="center">
+            <Grid size={12}>
               <Box className="tp-copyright tp-copyright-two text-center">
                 <Typography variant="body2" className="m-0">
-                  Copyright ©2025 <span>UHC Services</span>. All Rights Reserved.
+                  Copyright ©2025 <span>UHC Services</span>. All Rights
+                  Reserved.
                 </Typography>
               </Box>
-            </Grid2>
-          </Grid2>
+            </Grid>
+          </Grid>
         </Container>
+      </Box>
+      <Box sx={{ position: "absolute", left: 0, bottom: 0 }}>
+        <Link
+          to="https://wa.me/+17788004455"
+          target="_blank"
+          style={{
+            position: "fixed",
+            left: "10px",
+            bottom: "-12px",
+            color: "#91cc22",
+            zIndex: "99999",
+            fontSize:'80px'
+          }}
+        >
+          <i className="fab fa-whatsapp"></i>
+        </Link>
       </Box>
     </footer>
   );

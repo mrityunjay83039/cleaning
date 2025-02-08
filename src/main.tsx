@@ -1,11 +1,14 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import './assets/css/bootstrap.min.css'
+import "./assets/css/bootstrap.min.css";
 import "./index.css";
 import './assets/css/main.css'
 import './assets/css/meanmenu.css'
 import './assets/css/default.css'
+import './assets/css/swiper-bundle.css'
 import './assets/css/venobox.min.css'
+import './assets/css/flaticon.css'
+import './assets/css/fontawesome.min.css'
 import App from "./App.tsx";
 import { Provider } from "react-redux";
 import { persistor, store } from "./redux/Store.tsx";
