@@ -80,7 +80,7 @@ const Footer = () => {
             {/* Column 2 */}
             <Grid xs={12} sm={6} lg={4}>
               <Box
-                className="tp-footer-widget footer-col-2 mb-30 wow fadeInUp"
+                className="tp-footer-widget footer-col-2 mb-30 wow fadeInUp footer-services-sec"
                 data-wow-delay=".6s"
               >
                 <Typography
@@ -112,7 +112,7 @@ const Footer = () => {
             {/* Column 3 */}
             <Grid xs={12} sm={6} lg={4}>
               <Box
-                className="tp-footer-widget mb-30 wow fadeInUp"
+                className="tp-footer-widget mb-30 wow fadeInUp footer-recent-news"
                 data-wow-delay=".9s"
               >
                 <Typography

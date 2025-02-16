@@ -16,7 +16,8 @@ $('#tp-mobile-menu').meanmenu({
 });
 
 //mobile side menu
-$('.side-toggle').on('click', function () {
+$(document).ready(function(){
+	$('.side-toggle').on('click', function () {
 	$('.side-info').addClass('info-open');
 	$('.offcanvas-overlay').addClass('overlay-open');
 })
@@ -25,6 +26,8 @@ $('.side-info-close,.offcanvas-overlay').on('click', function () {
 	$('.side-info').removeClass('info-open');
 	$('.offcanvas-overlay').removeClass('overlay-open');
 })
+})
+
 
 //sticky menu activation
 win.on('scroll', function () {
