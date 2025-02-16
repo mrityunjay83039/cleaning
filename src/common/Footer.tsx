@@ -39,18 +39,39 @@ const Footer = () => {
                     a mone lestie nice disease
                   </Typography>
                   <Box className="tp-footer-info-social tp-footer-info-social-three">
-                    <a href="#">
+                    <a
+                      href="https://www.facebook.com/uhcservices/"
+                      target="_blank"
+                    >
                       <i className="fab fa-facebook-f"></i>
                     </a>
-                    <a href="#">
-                      <i className="fab fa-twitter"></i>
+                    <a href="https://www.x.com/uhc_services" target="_blank">
+                      <img
+                        src="/img/twitter.png"
+                        alt="Twitter"
+                        style={{ filter: "invert(1)", width: "35%" }}
+                      />
                     </a>
-                    <a href="#">
+                    <a
+                      href="https://www.instagram.com/uhc_services/"
+                      target="_blank"
+                    >
                       <i className="fab fa-instagram"></i>
                     </a>
-                    <a href="#">
-                      <i className="fab fa-google"></i>
+                    <a
+                      href="https://www.linkedin.com/company/uhc-services/"
+                      target="_blank"
+                    >
+                      <i className="fab fa-linkedin"></i>
                     </a>
+                    <a
+                      href="https://www.youtube.com/@uhc_services"
+                      target="_blank"
+                    >
+                      <i className="fab fa-youtube"></i>
+                    </a>
+
+                    
                   </Box>
                 </Box>
               </Box>
@@ -207,7 +228,7 @@ const Footer = () => {
             bottom: "-12px",
             color: "#91cc22",
             zIndex: "99999",
-            fontSize:'80px'
+            fontSize: "80px",
           }}
         >
           <i className="fab fa-whatsapp"></i>

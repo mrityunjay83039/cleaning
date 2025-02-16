@@ -9,7 +9,7 @@ const ContactUs = () => {
                 <div className="row">
                     <div className="col-12">
                         <div className="tp-contact-map">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830894612!2d-74.11976383964465!3d40.69766374865766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1636888514620!5m2!1sen!2sbd" style={{border:0}}  loading="lazy"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2611.9522181441257!2d-122.83091182466639!3d49.106548183212276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5485dba9b0ce8d63%3A0x47868701f4299a8e!2s14225%2057%20Ave%2C%20Surrey%2C%20BC%20V3X%202W6%2C%20Canada!5e0!3m2!1sen!2sin!4v1739240748594!5m2!1sen!2sin" style={{border:0}}  loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@ const ContactUs = () => {
                                     </div>
                                     <div className="tp-contact-info-text">
                                         <h4 className="tp-contact-info-title mb-15">Address</h4>
-                                        <p>5/A 5suvastu arcade, 3rd Floor <br/>palace road, London.</p>
+                                        <p>#305, 14225 57 Avenue, Surrey, British Columbia, Canada</p>
                                     </div>
                                 </div>
                             </div>
@@ -49,8 +49,8 @@ const ContactUs = () => {
                                     </div>
                                     <div className="tp-contact-info-text">
                                         <h4 className="tp-contact-info-title mb-15">Phone</h4>
-                                        <a href="tel:333888200-55">333888200-55</a>
-                                        <a href="tel:444555300-25">444555300-25</a>
+                                        <a href="tel:+1(778)800-4455">+1(778)800-4455</a>
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -61,8 +61,8 @@ const ContactUs = () => {
                                     </div>
                                     <div className="tp-contact-info-text">
                                         <h4 className="tp-contact-info-title mb-15">Email</h4>
-                                        <a href="mailto:info@themepure.com">info@themepure.com</a>
-                                        <a href="mailto:info@themepure.com">info@themepure.com</a>
+                                        <a href="mailto:info@uhcservices.ca">info@uhcservices.ca</a>
+                                       
                                     </div>
                                 </div>
                             </div>

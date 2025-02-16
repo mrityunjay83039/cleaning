@@ -38,7 +38,56 @@ const HomePage = () => {
               <div className="container">
                 <div className="row">
                   <div className="col-12">
-                    <div className="tp-slider-three z-index">
+                    <div className="tp-slider-three z-index text-center">
+                      <h6
+                        className="tp-slider-three-subtitle"
+                        data-animation="fadeInUp"
+                        data-delay=".3s"
+                      >
+                        <img
+                          src={SliderIcon1}
+                          className="img-fluid"
+                          alt="img not found"
+                        />{" "}
+                        Your Trusted Partner in  Commercial & Post construction Professional Cleaning 
+                      </h6>
+                      <h1
+                        className="tp-slider-three-title"
+                        data-animation="fadeInUp"
+                        data-delay=".6s"
+                      >
+                        Urban Helping & Cleaning Services Ltd.
+                      </h1>
+                      <div
+                        className="tp-slider-three-btn"
+                        data-animation="fadeInUp"
+                        data-delay=".9s"
+                      >
+                        <a href="about.html" className="yellow-btn">
+                          <i className="flaticon-enter"></i> Learn More
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="tp-single-slider-three tp-slider-height-three d-flex align-items-center swiper-slide"
+              data-swiper-autoplay="5000"
+            >
+              <div className="slide-bg" data-background={SliderBg3}></div>
+              <div className="slider-img-three">
+                <img
+                  src={SliderImg3}
+                  className="img-fluid"
+                  alt="img not found"
+                />
+              </div>
+              <div className="container">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="tp-slider-three z-index text-center">
                       <h6
                         className="tp-slider-three-subtitle"
                         data-animation="fadeInUp"
@@ -89,58 +138,7 @@ const HomePage = () => {
               <div className="container">
                 <div className="row">
                   <div className="col-12">
-                    <div className="tp-slider-three z-index">
-                      <h6
-                        className="tp-slider-three-subtitle"
-                        data-animation="fadeInUp"
-                        data-delay=".3s"
-                      >
-                        <img
-                          src={SliderIcon1}
-                          className="img-fluid"
-                          alt="img not found"
-                        />{" "}
-                        Fast and efficient service
-                      </h6>
-                      <h1
-                        className="tp-slider-three-title"
-                        data-animation="fadeInUp"
-                        data-delay=".6s"
-                      >
-                        Cleaning <br />
-                        Excellence <br />
-                        Guaranteed!
-                      </h1>
-                      <div
-                        className="tp-slider-three-btn"
-                        data-animation="fadeInUp"
-                        data-delay=".9s"
-                      >
-                        <a href="about.html" className="yellow-btn">
-                          <i className="flaticon-enter"></i> Learn More
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              className="tp-single-slider-three tp-slider-height-three d-flex align-items-center swiper-slide"
-              data-swiper-autoplay="5000"
-            >
-              <div className="slide-bg" data-background={SliderBg3}></div>
-              <div className="slider-img-three">
-                <img
-                  src={SliderImg3}
-                  className="img-fluid"
-                  alt="img not found"
-                />
-              </div>
-              <div className="container">
-                <div className="row">
-                  <div className="col-12">
-                    <div className="tp-slider-three z-index">
+                    <div className="tp-slider-three z-index text-center">
                       <h6
                         className="tp-slider-three-subtitle"
                         data-animation="fadeInUp"
@@ -598,7 +596,7 @@ const HomePage = () => {
                       <div className="tp-contact-cta-inner-text">
                         <span>Office Address</span>
                         <Typography variant="h5">
-                          #305, 14225 57 Avenue, Surrey
+                        #305, 14225 57 Avenue,<br/> Surrey,  BC, Canada
                         </Typography>
                       </div>
                     </div>

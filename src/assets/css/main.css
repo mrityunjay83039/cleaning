@@ -32,8 +32,11 @@
 /*----------------------------------------*/
 
 :root {
-  --primary-color: #8fcb20;    /* Main brand color */
-  --secondary-color: #0172bd;  /* Secondary brand color */
+  --primary-color: #90cc1f;    /* Main brand color */
+  --secondary-color: #0172bd;
+/* 
+  --primary-color: #8fcb20;    
+  --secondary-color: #0172bd;   */
   --text-color: #333333;        /* Default text color */
   --dark-bg: #1a1a1a;          /* Dark background */
   --light-bg: #f8f9fa;          /* Light background */
@@ -2972,16 +2975,16 @@ select {
 }
 
 .tp-slider-height-three {
-  min-height: 850px;
+  min-height: 80vh;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .tp-slider-height-three {
-    min-height: 750px;
+    min-height: 80vh;
   }
 }
 @media (max-width: 767px) {
   .tp-slider-height-three {
-    min-height: 650px;
+    min-height: 80vh;
   }
   .tp-slider-height-three h1 br {
     display: none;
@@ -3037,7 +3040,7 @@ select {
 }
 
 .tp-slider-three-title {
-  font-size: 90px;
+  font-size: 60px;
   line-height: 1;
   color: #ffffff;
   margin-bottom: 45px;
