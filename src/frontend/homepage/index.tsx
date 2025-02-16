@@ -1,7 +1,9 @@
 import { Container, Grid, Button, Typography, Grid2, Box } from "@mui/material";
 import SliderBg3 from "../../assets/img/slider/slider-bg-3.jpg";
 import SliderIcon1 from "../../assets/img/icon/slider-icon-1.png";
-import SliderImg3 from "../../assets/img/slider/slider-img-3.png";
+import SliderImg3 from "../../assets/img/before-after/3.webp";
+import SliderImg2 from "../../assets/img/before-after/2.webp";
+import SliderImg1 from "../../assets/img/before-after/1.webp";
 import AboutImg3 from "../../assets/img/about/about-img-3.jpg";
 import AboutImg4 from "../../assets/img/about/about-img-4.jpg";
 import AboutImgShape3 from "../../assets/img/about/about-img-shape-3.png";
@@ -38,7 +40,7 @@ const HomePage = () => {
               <div className="container">
                 <div className="row">
                   <div className="col-12">
-                    <div className="tp-slider-three z-index text-center">
+                    {/* <div className="tp-slider-three z-index text-center">
                       <h6
                         className="tp-slider-three-subtitle"
                         data-animation="fadeInUp"
@@ -49,7 +51,8 @@ const HomePage = () => {
                           className="img-fluid"
                           alt="img not found"
                         />{" "}
-                        Your Trusted Partner in  Commercial & Post construction Professional Cleaning 
+                        Your Trusted Partner in Commercial & Post construction
+                        Professional Cleaning
                       </h6>
                       <h1
                         className="tp-slider-three-title"
@@ -67,7 +70,7 @@ const HomePage = () => {
                           <i className="flaticon-enter"></i> Learn More
                         </a>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -79,7 +82,7 @@ const HomePage = () => {
               <div className="slide-bg" data-background={SliderBg3}></div>
               <div className="slider-img-three">
                 <img
-                  src={SliderImg3}
+                  src={SliderImg2}
                   className="img-fluid"
                   alt="img not found"
                 />
@@ -87,7 +90,7 @@ const HomePage = () => {
               <div className="container">
                 <div className="row">
                   <div className="col-12">
-                    <div className="tp-slider-three z-index text-center">
+                    {/* <div className="tp-slider-three z-index text-center">
                       <h6
                         className="tp-slider-three-subtitle"
                         data-animation="fadeInUp"
@@ -118,7 +121,7 @@ const HomePage = () => {
                           <i className="flaticon-enter"></i> Learn More
                         </a>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -130,7 +133,7 @@ const HomePage = () => {
               <div className="slide-bg" data-background={SliderBg3}></div>
               <div className="slider-img-three">
                 <img
-                  src={SliderImg3}
+                  src={SliderImg1}
                   className="img-fluid"
                   alt="img not found"
                 />
@@ -138,7 +141,7 @@ const HomePage = () => {
               <div className="container">
                 <div className="row">
                   <div className="col-12">
-                    <div className="tp-slider-three z-index text-center">
+                    {/* <div className="tp-slider-three z-index text-center">
                       <h6
                         className="tp-slider-three-subtitle"
                         data-animation="fadeInUp"
@@ -169,7 +172,7 @@ const HomePage = () => {
                           <i className="flaticon-enter"></i> Learn More
                         </a>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -265,10 +268,14 @@ const HomePage = () => {
                   </Typography>
                 </div>
                 <Typography className="mb-40">
-                  Fusce fusce ante dis varius iaculis quis penatibus do placerat
-                  et convallis ultricies egestas hacker pharetra veile litora
-                  nascetur diam dapibus euismod neque sapien siverra nunc nisler
-                  fortune litora neque.
+                  UHC is a professional cleaning company providing cleaning
+                  services throughout British Columbia. We provide cleaning
+                  services for commercial properties, offices, residential
+                  buildings, warehouses, banks, hospitals, senior homes,
+                  restaurants, educational institutions, and construction-sites
+                  as well. We excel in providing top-notch services. Our
+                  experienced team has all the relevant certifications and
+                  high-tech equipment’s to perform the job.
                 </Typography>
                 <Grid container spacing={2}>
                   <Grid item sm={6}>
@@ -412,7 +419,7 @@ const HomePage = () => {
           </Grid>
           <Box display="flex" justifyContent="center">
             <Link className="theme-btn" to="/services">
-              <i className="flaticon-enter"></i> View All 
+              <i className="flaticon-enter"></i> View All
             </Link>
           </Box>
         </Container>
@@ -596,7 +603,8 @@ const HomePage = () => {
                       <div className="tp-contact-cta-inner-text">
                         <span>Office Address</span>
                         <Typography variant="h5">
-                        #305, 14225 57 Avenue,<br/> Surrey,  BC, Canada
+                          #305, 14225 57 Avenue,
+                          <br /> Surrey, BC, Canada
                         </Typography>
                       </div>
                     </div>
