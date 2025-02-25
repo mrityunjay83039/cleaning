@@ -4491,8 +4491,8 @@ select {
   color: #ffffff;
 }
 .tp-service-four:hover .tp-service-three-text-btn a:hover {
-  background: #fed10c;
-  color: #09150f;
+  background: var(--secondary-color);
+  color: var(--light-bg);
 }
 
 .tp-faqs-left-sidebar.tp-services-sidebar ul li {

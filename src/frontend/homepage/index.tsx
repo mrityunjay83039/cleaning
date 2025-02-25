@@ -1,17 +1,9 @@
 import { Container, Grid, Button, Typography, Grid2, Box } from "@mui/material";
 import SliderBg3 from "../../assets/img/slider/slider-bg-3.jpg";
-import SliderIcon1 from "../../assets/img/icon/slider-icon-1.png";
 import SliderImg3 from "../../assets/img/before-after/3.webp";
 import SliderImg2 from "../../assets/img/before-after/2.webp";
 import SliderImg1 from "../../assets/img/before-after/1.webp";
-import AboutImg3 from "../../assets/img/about/about-img-3.jpg";
-import AboutImg4 from "../../assets/img/about/about-img-4.jpg";
 import AboutImgShape3 from "../../assets/img/about/about-img-shape-3.png";
-import Service9 from "../../assets/img/service/service-9.jpg";
-import Service10 from "../../assets/img/service/service-10.jpg";
-import Service11 from "../../assets/img/service/service-11.jpg";
-import Service12 from "../../assets/img/service/service-12.jpg";
-import AboutImg5 from "../../assets/img/about/about-img-5.jpg";
 import BlogImg7 from "../../assets/img/blog/blog-img-7.jpg";
 import BlogImg8 from "../../assets/img/blog/blog-img-8.jpg";
 import BlogImg9 from "../../assets/img/blog/blog-img-9.jpg";
@@ -234,28 +226,26 @@ const HomePage = () => {
                 data-wow-delay=".3s"
               >
                 <img
-                  src={AboutImg3}
+                  src="./img/service/commercial-cleaning-service.png"
                   className="img-fluid"
-                  alt="img-not-found"
+                  alt="about image"
+                  style={{width:'70%'}}
                 />
                 <img
-                  src={AboutImg4}
+                  src="./img/service/regular-cleaning-service.jpg"
                   className="img-fluid tp-about-img-three-second"
-                  alt="img-not-found"
+                  alt="about image"
+                  style={{width:'60%'}}
                 />
-                <img
-                  src={AboutImgShape3}
-                  className="img-fluid tp-about-img-three-third"
-                  alt="img-not-found"
-                />
+               
               </div>
             </Grid>
             <Grid item xs={12} md={6}>
               <div
-                className="tp-about-text tp-about-text-three mb-30 wow fadeInUp"
+                className="tp-about-text tp-about-text-three tp-about-inner-page-text mb-30 wow fadeInUp"
                 data-wow-delay=".6s"
               >
-                <div className="section-title-wrapper mb-25">
+                <div className="section-title-wrapper mb-25 text-center">
                   <Typography
                     variant="h5"
                     className="tp-section-subtitle-three mb-20 theme-blue-color"
@@ -263,10 +253,10 @@ const HomePage = () => {
                     About UHC Services
                   </Typography>
                   <Typography
-                    variant="h2"
+                    variant="h3"
                     className="tp-section-title-two color-theme-blue"
                   >
-                    Cleaning Services for All
+Cleaning Up your Mess is Our Success
                   </Typography>
                 </div>
                 <Typography className="mb-40">
@@ -279,56 +269,50 @@ const HomePage = () => {
                   experienced team has all the relevant certifications and
                   high-tech equipment’s to perform the job.
                 </Typography>
-                <Grid container spacing={2}>
-                  <Grid item sm={6}>
-                    <div className="tp-about-service mb-35">
-                      <div className="tp-about-service-icon yellow-circle-shape mb-20">
-                        <i className="flaticon-snowfall"></i>
+                <div className="row">
+                  <div className="col-sm-6">
+                    <div className="tp-about-number mb-30">
+                      <div className="tp-about-number-icon">
+                        <i className="flaticon-phone-call-1"></i>
                       </div>
-                      <div className="tp-about-service-text">
-                        <Typography
-                          variant="h4"
-                          className="tp-about-service-text-title mb-15"
+                      <div className="tp-about-number-text">
+                        <span className="heading-color-black">
+                          Contact Now
+                        </span>
+                        <a
+                          href="tel:+1(778)800-4455"
+                          className="heading-color-black"
                         >
-                          <a href="service.html">
-                            Residential Cleaning Services
-                          </a>
-                        </Typography>
-                        <Typography>
-                          Duis congue atend lorem consequat interdum pretium
-                          ligula semper
-                        </Typography>
+                          +1(778)800-4455
+                        </a>
                       </div>
                     </div>
-                  </Grid>
-                  <Grid item sm={6}>
-                    <div className="tp-about-service mb-35">
-                      <div className="tp-about-service-icon yellow-circle-shape mb-20">
-                        <i className="flaticon-business-and-trade"></i>
+                  </div>
+                  <div className="col-sm-6">
+                  <div className="tp-about-number mb-30">
+                      <div className="tp-about-number-icon">
+                        <i className="flaticon-email-1"></i>
                       </div>
-                      <div className="tp-about-service-text">
-                        <Typography
-                          variant="h4"
-                          className="tp-about-service-text-title mb-15"
+                      <div className="tp-about-number-text">
+                        <span className="heading-color-black">
+                          Email Now
+                        </span>
+                        <a
+                          href="mailto:info@uhcservices.ca"
+                          className="heading-color-black"
                         >
-                          <Link to="/services">
-                            Commercial Cleaning Services
-                          </Link>
-                        </Typography>
-                        <Typography>
-                          Duis congue atend lorem consequat interdum pretium
-                          ligula semper
-                        </Typography>
+                          info@uhcservices.ca
+                        </a>
                       </div>
                     </div>
-                  </Grid>
-                </Grid>
+                  </div>
+                </div>
                 <Grid container>
                   <Grid item xs={12}>
-                    <div className="tp-about-three-btn">
+                    <div className="tp-about-three-btn text-center">
                       <Button
                         variant="contained"
-                        className="theme-btn"
+                        className="theme-btn mt-2"
                         href="service-details.html"
                       >
                         <i className="flaticon-enter"></i> Learn More

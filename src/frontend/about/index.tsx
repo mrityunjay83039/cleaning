@@ -1,5 +1,3 @@
-import aboutImg2 from "../../assets/img/about/about-img-2.jpg";
-import aboutImg3 from "../../assets/img/about/about-img-3.png";
 import aboutAuthor from "../../assets/img/about/about-author.png";
 import Faq from "../../common/Faq";
 import { Typography } from "@mui/material";
@@ -23,14 +21,16 @@ const About = () => {
                 data-wow-delay=".4s"
               >
                 <img
-                  src={aboutImg2}
+                  src="./img/service/commercial-cleaning-service.png"
                   className="img-fluid"
-                  alt="img not found"
+                  alt="about image"
+                  style={{width:'70%'}}
                 />
                 <img
-                  src={aboutImg3}
+                  src="./img/service/post-renovation-cleaning.jpg"
                   className="img-fluid img-second"
-                  alt="img not found"
+                  alt="about image"
+                  style={{width:"80%"}}
                 />
                 <div className="tp-about-img-two-badge">
                   <h3>20</h3>
@@ -66,40 +66,7 @@ const About = () => {
                   experienced team has all the relevant certifications and
                   high-tech equipment’s to perform the job.
                 </p>
-                {/* <div className="row mb-10">
-                <div className="col-sm-6">
-                  <div className="tp-about-service mb-30">
-                    <div className="tp-about-service-icon yellow-circle-shape mb-15">
-                      <i className="flaticon-snowfall"></i>
-                    </div>
-                    <div className="tp-about-service-text">
-                      <h4 className="tp-about-service-text-title mb-15 heading-color-black-with-hover">
-                        <a href="service.html">Residential Cleaning Services</a>
-                      </h4>
-                      <p>
-                        Duis congue atend lorem consequat interdum pretium
-                        ligula semper
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6">
-                  <div className="tp-about-service mb-30">
-                    <div className="tp-about-service-icon yellow-circle-shape mb-15">
-                      <i className="flaticon-business-and-trade"></i>
-                    </div>
-                    <div className="tp-about-service-text">
-                      <h4 className="tp-about-service-text-title mb-15 heading-color-black-with-hover">
-                        <a href="service.html">Commercial Cleaning Services</a>
-                      </h4>
-                      <p>
-                        Duis congue atend lorem consequat interdum pretium
-                        ligula semper
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
+
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="tp-about-number mb-30">

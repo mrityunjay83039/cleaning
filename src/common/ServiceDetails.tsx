@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import serviceFeature from "../assets/img/icon/service-feature.png";
 
 const ServiceDetails = ({ serviceData }) => {
-  const { service_image, service_name } = serviceData;
+  const { service_image, service_name, service_description } = serviceData;
 
   return (
     <>
@@ -59,7 +59,8 @@ const ServiceDetails = ({ serviceData }) => {
                 <h2 className="tp-section-title heading-color-black pt-10 mb-20">
                   {service_name}
                 </h2>
-                <p className="mb-20">
+                {service_description}
+                {/* <p className="mb-20">
                   Fusce fusce ante dis varius iaculis quis penatibus do placerat
                   et convallis ultricies egestas hacker pharetra veile litora
                   nascetur diam dapibus euismod neque sapien siverra nunc nisler
@@ -106,7 +107,7 @@ const ServiceDetails = ({ serviceData }) => {
                   a mattis, fames. Ut vestibulum enim tincidunt varius ligula mi
                   conubia quisque pretium bibendum. Mauris montes fusce dolor
                   leo aliquet tempus felis.
-                </p>
+                </p> */}
                 <div className="tp-service-details-img mb-30 position-relative">
                   <img
                     src="assets/img/service/service-details-3.jpg"

@@ -7,6 +7,10 @@ import ContactUs from "../frontend/contact";
 import Blogs from "../frontend/blogs";
 import ServiceDetails from "./ServiceDetails";
 import RegularCleaning from "../frontend/services/RegularCleaning";
+import CommercialCleaning from "../frontend/services/CommercialCleaning";
+import StrataCleaning from "../frontend/services/StrataCleaning";
+import DeepCleaning from "../frontend/services/DeepCleaning";
+import MoveInOutCleaning from "../frontend/services/MoveInOutCleaning";
 
 const frontendRoutes = createBrowserRouter([
   {
@@ -32,32 +36,32 @@ const frontendRoutes = createBrowserRouter([
       },
       {
         path: "/services/commercial-cleaning-service",
-        element: <ServiceDetails />,
+        element: <CommercialCleaning />,
       },
       {
         path: "/services/strata-cleaning-service",
-        element: <ServiceDetails />,
+        element: <StrataCleaning />,
       },
       {
         path: "/services/deep-cleaning-service",
-        element: <ServiceDetails />,
+        element: <DeepCleaning />,
       },
       {
         path: "/services/move-in-move-out-cleaning-service",
-        element: <ServiceDetails />,
+        element: <MoveInOutCleaning />,
       },
-      {
-        path: "/services/post-construction-post-or-post-renovation-cleaning-service",
-        element: <ServiceDetails />,
-      },
-      {
-        path: "/services/pre-sale-cleaning-service",
-        element: <ServiceDetails />,
-      },
-      {
-        path: "/services/parkade-cleaning-service",
-        element: <ServiceDetails />,
-      },
+      // {
+      //   path: "/services/post-construction-post-or-post-renovation-cleaning-service",
+      //   element: <ServiceDetails />,
+      // },
+      // {
+      //   path: "/services/pre-sale-cleaning-service",
+      //   element: <ServiceDetails />,
+      // },
+      // {
+      //   path: "/services/parkade-cleaning-service",
+      //   element: <ServiceDetails />,
+      // },
       {
         path: "/contact-us",
         element: <ContactUs />,
