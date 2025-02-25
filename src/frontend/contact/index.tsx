@@ -1,8 +1,10 @@
+import BreadCrumb from "../../common/BreadCrumb";
 
 
 const ContactUs = () => {
   return (
    <>
+   <BreadCrumb breadCrumTitle="Free Contact" pageName="Contact Us"/>
    {/* <!-- map area start here --> */}
         <div className="tp-map-area pt-120 pb-115">
             <div className="container">

@@ -17,6 +17,8 @@ import BlogImg8 from "../../assets/img/blog/blog-img-8.jpg";
 import BlogImg9 from "../../assets/img/blog/blog-img-9.jpg";
 import Testimonial from "../../common/Testimonial";
 import { Link } from "react-router-dom";
+import Service from "../../common/service";
+import { serviceList } from "../../config/constants";
 
 const HomePage = () => {
   return (
@@ -365,58 +367,24 @@ const HomePage = () => {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
-            {[
-              "House Cleaning",
-              "Hospital Cleaning",
-              "Kitchen Cleaning",
-              "Window Cleaning",
-            ].map((title, index) => (
-              <Grid item lg={6} key={index}>
-                <div
-                  className="tp-service-three mb-30 wow fadeInUp"
-                  data-wow-delay={`${0.6 + index * 0.3}s`}
-                >
-                  <div className="tp-service-three-img">
-                    <img
-                      src={[Service9, Service10, Service11, Service12][index]}
-                      className="img-fluid"
-                      alt="img-not-found"
-                    />
-                    <div className="tp-service-three-img-icon">
-                      <i
-                        className={`flaticon-${title
-                          .toLowerCase()
-                          .replace(" ", "-")}`}
-                      ></i>
-                    </div>
-                  </div>
-                  <div className="tp-service-three-text fix">
-                    <Typography
-                      variant="h4"
-                      className="tp-service-three-title mb-20"
-                    >
-                      <Link to="/services">{title}</Link>
-                    </Typography>
-                    <Typography className="mb-30">
-                      Buscipit tincidunt duis antino gravidia nam tellusy
-                      nascetur neque vulpuits aenean is scelerisque ultrces
-                      muscle mass and matter order commo
-                    </Typography>
-                    <div className="tp-service-three-text-btn">
-                      <Button
-                        variant="contained"
-                        className="yellow-btn"
-                        href="service-details.html"
-                      >
-                        <i className="flaticon-enter"></i> Learn More
-                      </Button>
-                    </div>
-                  </div>
+          <div className="row">
+            {serviceList.map((ele) => {
+              return (
+                <div className="col-lg-6">
+                  <Service
+                    key={ele.id}
+                    serviceImg={ele.img}
+                    serviceIcon={ele.icon}
+                    serviceTitle={ele.title}
+                    serviceDesc={ele.desc}
+                    serviceBtnLink={ele.btnLink}
+                    serviceBtnText={ele.btnText}
+                  />
                 </div>
-              </Grid>
-            ))}
-          </Grid>
+              );
+            })}
+          </div>
+
           <Box display="flex" justifyContent="center">
             <Link className="theme-btn" to="/services">
               <i className="flaticon-enter"></i> View All

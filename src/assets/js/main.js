@@ -130,35 +130,44 @@ $(".popup-video").magnificPopup({
                 prevEl: '.swiper-button-prev',
             },
         });
+
+		// testimonial 1 activation
+
+		let atestimonial1 = new Swiper('.tp-testimonial-active', {
+			slidesPerView: 1,
+			spaceBetween: 30,
+			 direction: 'horizontal',
+			// direction: 'vertical',
+			loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: true,
+            },
+		  
+			// // If we need pagination
+			// pagination: {
+			//   el: '.swiper-pagination',
+			//   clickable: true,
+			// },
+		  
+			// Navigation arrows
+			navigation: {
+			  nextEl: '.testimonial-button-next',
+			  prevEl: '.testimonial-button-prev',
+			},
+		  
+			// And if we need scrollbar
+			// scrollbar: {
+			//   el: '.swiper-scrollbar',
+			// },
+	
+		  });
+	
     });
     
-    // testimonial 1 activation
-	if (jQuery(".tp-testimonial-active").length > 0) {
-	let atestimonial1 = new Swiper('.tp-testimonial-active', {
-		slidesPerView: 1,
-		spaceBetween: 30,
-		// direction: 'vertical',
-		loop: false,
-	  
-		// If we need pagination
-		pagination: {
-		  el: '.swiper-pagination',
-		  clickable: true,
-		},
-	  
-		// Navigation arrows
-		navigation: {
-		  nextEl: '.testimonial-button-next',
-		  prevEl: '.testimonial-button-prev',
-		},
-	  
-		// And if we need scrollbar
-		scrollbar: {
-		  el: '.swiper-scrollbar',
-		},
 
-	  });
-	}
+
+    
     
 	// testimonial two activation
 	if (jQuery(".tp-testimonial-two-active").length > 0) {

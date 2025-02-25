@@ -35,8 +35,7 @@ const Footer = () => {
                     </Link>
                   </Box>
                   <Typography variant="body1" className="text-white mb-35">
-                    Pulvinar seneius morbi to quisque nunc a towa faucibus netus
-                    a mone lestie nice disease
+                  UHC is a professional cleaning company providing cleaning services throughout British Columbia.
                   </Typography>
                   <Box className="tp-footer-info-social tp-footer-info-social-three">
                     <a

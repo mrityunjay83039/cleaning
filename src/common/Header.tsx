@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import AppSnackBar from "./snackBar";
 import { CardMedia } from "@mui/material";
+import { serviceList_servicePage } from "../config/constants";
 
 const Header = () => {
   return (
@@ -59,14 +60,19 @@ const Header = () => {
                       </li>
                       <li className="menu-item-has-children">
                         <Link to="/services">Services</Link>
-                        {/* <ul className="sub-menu">
-                          <li>
-                            <Link to="/service">Services</Link>
-                          </li>
-                          <li>
-                            <Link to="/service-details">Services Details</Link>
-                          </li>
-                        </ul> */}
+                        <ul className="sub-menu service-submenu">
+                          <div className="row">
+                            {serviceList_servicePage.map((item) => {
+                              return (
+                                <div className="col-md-4">
+                                  <li key={item.id}>
+                                    <Link to={item.btnLink}>{item.title}</Link>
+                                  </li>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </ul>
                       </li>
                       <li className="menu-item-has-children">
                         <Link to="/blogs">Blog</Link>
@@ -132,14 +138,15 @@ const Header = () => {
                     </li>
                     <li className="menu-item-has-children">
                       <Link to="/services">Services</Link>
-                      {/* <ul className="sub-menu">
-                          <li>
-                            <Link to="/service">Services</Link>
-                          </li>
-                          <li>
-                            <Link to="/service-details">Services Details</Link>
-                          </li>
-                        </ul> */}
+                      <ul className="sub-menu">
+                        {serviceList_servicePage.map((item) => {
+                          return (
+                            <li key={item.id}>
+                              <Link to={item.btnLink}>{item.title}</Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
                     </li>
                     <li className="menu-item-has-children">
                       <Link to="/blogs">Blog</Link>
@@ -177,37 +184,37 @@ const Header = () => {
                   </li>
                 </ul>
                 <div className="sidebar__menu--social">
-                <a
-                      href="https://www.facebook.com/uhcservices/"
-                      target="_blank"
-                    >
-                      <i className="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://www.x.com/uhc_services" target="_blank">
-                      <img
-                        src="/img/twitter.png"
-                        alt="Twitter"
-                        style={{ filter: "invert(1)", width: "35%" }}
-                      />
-                    </a>
-                    <a
-                      href="https://www.instagram.com/uhc_services/"
-                      target="_blank"
-                    >
-                      <i className="fab fa-instagram"></i>
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/company/uhc-services/"
-                      target="_blank"
-                    >
-                      <i className="fab fa-linkedin"></i>
-                    </a>
-                    <a
-                      href="https://www.youtube.com/@uhc_services"
-                      target="_blank"
-                    >
-                      <i className="fab fa-youtube"></i>
-                    </a>
+                  <a
+                    href="https://www.facebook.com/uhcservices/"
+                    target="_blank"
+                  >
+                    <i className="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="https://www.x.com/uhc_services" target="_blank">
+                    <img
+                      src="/img/twitter.png"
+                      alt="Twitter"
+                      style={{ filter: "invert(1)", width: "35%" }}
+                    />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/uhc_services/"
+                    target="_blank"
+                  >
+                    <i className="fab fa-instagram"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/company/uhc-services/"
+                    target="_blank"
+                  >
+                    <i className="fab fa-linkedin"></i>
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@uhc_services"
+                    target="_blank"
+                  >
+                    <i className="fab fa-youtube"></i>
+                  </a>
                 </div>
               </div>
             </div>

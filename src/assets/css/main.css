@@ -1721,7 +1721,7 @@ select {
 }
 .theme-btn:hover {
   background: var(--primary-color);
-  color: #064e2a;
+  color: var(--light-bg);
 }
 
 .yellow-btn:before,
@@ -2082,6 +2082,7 @@ select {
   text-align: left;
   padding: 15px 0;
 }
+
 .tp-main-menu ul li .sub-menu li {
   display: block;
   margin: 0px;
@@ -2124,7 +2125,14 @@ select {
   visibility: visible;
   top: 100%;
 }
-
+.service-submenu{
+  width: 70vw !important;
+  display: flex;
+  position: absolute;
+  left: -300px !important;
+  flex-wrap: wrap;
+ 
+}
 .tp-mobile-menu.mean-container {
   clear: both;
   overflow: hidden;
@@ -2476,7 +2484,7 @@ select {
   transform: translateY(4px);
 }
 .tp-header-right-three .tp-header-btn-three a {
-  color: #102579;
+  color: var(--light-bg);
 }
 .tp-header-right-three .tp-header-btn-three a:hover {
   color: #ffffff;
@@ -3019,7 +3027,7 @@ select {
     width: 100%;
     top: 0px;
     left: 0px;
-    background: rgba(0, 0, 0, 0.4);
+    /* background: rgba(0, 0, 0, 0.4); */
   }
   .slider-img-three img {
     height: 100%;
@@ -3583,7 +3591,7 @@ select {
   background: var(--primary-color);
 }
 .tp-appoint-contact button:hover {
-  background: #075f33;
+  background: var(--primary-color);
 }
 
 /*----------------------------------------*/
@@ -5303,8 +5311,8 @@ select {
   width: 65px;
   line-height: 65px;
   display: block;
-  background: #fed10c;
-  color: #064e2a;
+  background: var(--secondary-color);
+  color: var(--light-bg);
   cursor: pointer;
   border: none;
   outline: none;
@@ -5319,7 +5327,7 @@ select {
   margin: 0px;
 }
 .tp-testimonial-slider-arrow .slide-prev {
-  background: #075f33;
+  background: var(--primary-color);
   color: #ffffff;
 }
 
@@ -6649,7 +6657,7 @@ select {
   }
 }
 .avideo-btn a:hover {
-  background: #075f33;
+  background: var(--primary-color);
 }
 
 .basic-pagination ul li {
@@ -7119,7 +7127,7 @@ select {
   }
 }
 .tp-footer-news-single h6:hover {
-  color: #fed10c;
+  color: var(--primary-color);
 }
 .tp-footer-news-single span {
   display: block;
@@ -7754,9 +7762,9 @@ select {
 /*  19. Breadcrumb
 /*----------------------------------------*/
 .tp-page-title-area {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 
 .tp-page-title-img {

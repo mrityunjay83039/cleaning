@@ -67,9 +67,9 @@ const Layout = withErrorBoundary(() => {
 
       <div>
         <Header />
-        <Box>
+        <main>
           <Outlet />
-        </Box>
+        </main>
         <Footer/>
       </div>
     </>
