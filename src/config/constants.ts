@@ -1,59 +1,3 @@
-export const serviceList = [
-  {
-    id: 1,
-    img: "./img/service/regular-cleaning-service.jpg",
-    icon: "flaticon-house-cleaning",
-    title: "Regular Cleaning",
-    desc: "Our regular cleaning service is tailored to your needs—weekly, bi-weekly, or monthly. We handle dusting, sweeping, vacuuming, mopping, and dishes, ensuring a spotless space every time. Reliable, professional, and thorough—book your cleaning service today!",
-    btnLink: "/services/regular-cleaning-service",
-    btnText: "Read More",
-  },
-  {
-    id: 2,
-    img: "./img/service/commercial-cleaning-service.png",
-    icon: "flaticon-house-cleaning",
-    title: "Commercial Cleaning",
-    desc: "It ensures a clean, hygienic space for businesses, offices, and commercial properties. We provide dusting, vacuuming, floor cleaning, window washing, and disinfecting on a regular schedule using professional equipment and products. Book Now!",
-    btnLink: "/services/commercial-cleaning-service",
-    btnText: "Read More",
-  },
-  {
-    id: 3,
-    img: "./img/service/strata-cleaning-service.jpg",
-    icon: "flaticon-house-cleaning",
-    title: "Strata Cleaning",
-    desc: "Our strata cleaning service keeps common areas in multi-unit residential buildings spotless. We clean hallways, lobbies, stairwells, elevators, parking garages, and outdoor spaces, ensuring a well-maintained environment for residents. Reliable and professional—schedule your strata cleaning service today!",
-    btnLink: "/services/strata-cleaning-service",
-    btnText: "Read More",
-  },
-  {
-    id: 4,
-    img: "./img/service/deep-cleaning-service.jpg",
-    icon: "flaticon-house-cleaning",
-    title: "Deep Cleaning",
-    desc: "Our deep cleaning service provides a thorough, detailed clean beyond routine maintenance. We tackle overlooked areas like behind appliances, inside cabinets, light fixtures, and baseboards. From scrubbing grout to sanitizing high-touch surfaces, we ensure a fresh, hygienic space. Book today!",
-    btnLink: "/services/deep-cleaning-service",
-    btnText: "Read More",
-  },
-  {
-    id: 5,
-    img: "./img/service/move-in-out-service.jpg",
-    icon: "flaticon-house-cleaning",
-    title: "Move-in/Out Cleaning",
-    desc: "Our move-in/out cleaning ensures a spotless home for new occupants or a well-maintained space for the next tenant. We deep clean kitchens, bathrooms, floors, windows, and appliances, tackling neglected areas for a fresh start. Book your cleaning today!",
-    btnLink: "/services/move-in-move-out-cleaning-service",
-    btnText: "Read More",
-  },
-  {
-    id: 6,
-    img: "./img/service/post-renovation-cleaning.jpg",
-    icon: "flaticon-house-cleaning",
-    title: "Post-Construction/Post-Renovation Cleaning",
-    desc: "Our post-construction cleaning removes dust, debris, and residue after renovations. We clean walls, windows, carpets, and floors, ensuring a safe, presentable space. Let us handle the mess so you can enjoy your newly upgraded property. Schedule your cleaning today!",
-    btnLink: "/button",
-    btnText: "Read More",
-  },
-];
 
 export const serviceList_servicePage = [
     {
@@ -105,9 +49,9 @@ export const serviceList_servicePage = [
       id: 6,
       img: "./img/service/post-renovation-cleaning.jpg",
       icon: "flaticon-house-cleaning",
-      title: "Post-Construction/Post-Renovation Cleaning",
+      title: "Post-Construction Cleaning",
       desc: "Our post-construction cleaning removes dust, debris, and residue after renovations. We clean walls, windows, carpets, and floors, ensuring a safe, presentable space. Let us handle the mess so you can enjoy your newly upgraded property. Schedule your cleaning today!",
-      btnLink: "/button",
+      btnLink: "/services/post-construction-or-post-renovation-cleaning-service",
       btnText: "Read More",
     },
     {
@@ -116,7 +60,7 @@ export const serviceList_servicePage = [
       icon: "flaticon-house-cleaning",
       title: "Pre-Sale Cleaning",
       desc: "Enhance your home’s appeal with our pre-sale cleaning. We deep clean carpets, windows, floors, kitchens, and bathrooms, creating a welcoming, move-in-ready space. A spotless home attracts buyers and increases market value. Get your property sale-ready today!",
-      btnLink: "/button",
+      btnLink: "/services/pre-sale-cleaning-service",
       btnText: "Read More",
     },
     {
@@ -125,7 +69,7 @@ export const serviceList_servicePage = [
       icon: "flaticon-house-cleaning",
       title: "Parkade Cleaning",
       desc: "Our parkade cleaning service keeps parking garages clean and well-maintained. We sweep, pressure wash floors, remove debris, and clean walls to eliminate dirt, oil stains, and litter. Ensure a safe, spotless environment for drivers and pedestrians. Book today!",
-      btnLink: "/button",
+      btnLink: "/services/parkade-cleaning-service",
       btnText: "Read More",
     },
     {
@@ -134,7 +78,7 @@ export const serviceList_servicePage = [
       icon: "flaticon-house-cleaning",
       title: "Show-Home/Staging Cleaning",
       desc: "Make your property stand out with our show-home cleaning. We clean surfaces, floors, windows, and bathrooms while arranging furniture to enhance appeal. Create an inviting, move-in-ready space that captivates buyers. Ensure the perfect presentation—schedule your cleaning today!",
-      btnLink: "/button",
+      btnLink: "/services/show-home-cleaning-service",
       btnText: "Read More",
     },
     {
@@ -143,7 +87,7 @@ export const serviceList_servicePage = [
       icon: "flaticon-house-cleaning",
       title: "Junk Removal",
       desc: "Clear out unwanted items with our junk removal service. We haul away furniture, appliances, electronics, and general waste, ensuring a clutter-free, organized space. Whether for homes, businesses, or construction sites, we handle it all. Book your removal today!",
-      btnLink: "/button",
+      btnLink: "/services/junk-removal-cleaning-service",
       btnText: "Read More",
     },
     {
@@ -152,7 +96,7 @@ export const serviceList_servicePage = [
       icon: "flaticon-house-cleaning",
       title: "Priority Cleaning",
       desc: "Our priority cleaning service focuses on urgent or high-traffic areas, ensuring critical spaces like kitchens, bathrooms, and high-touch surfaces are sanitized and spotless. We address immediate cleaning needs efficiently. Keep your space fresh—schedule a priority cleaning today!",
-      btnLink: "/button",
+      btnLink: "/services/priority-cleaning-service",
       btnText: "Read More",
     },
     {
@@ -161,7 +105,7 @@ export const serviceList_servicePage = [
       icon: "flaticon-house-cleaning",
       title: "Laundry Services",
       desc: "Our laundry service handles washing, drying, folding, and ironing to keep your clothes fresh and organized. Whether for daily needs or special care, we ensure convenience and quality. Enjoy hassle-free laundry—schedule your service today!",
-      btnLink: "/button",
+      btnLink: "/services/laundry-service",
       btnText: "Read More",
     },
     {
@@ -170,7 +114,7 @@ export const serviceList_servicePage = [
       icon: "flaticon-house-cleaning",
       title: "Cooking Help",
       desc: "Make meal preparation easier with our cooking help service. We assist with chopping, meal planning, and cooking full meals for daily needs or special events. Enjoy stress-free, delicious meals with our expert help. Book your cooking assistance today!",
-      btnLink: "/button",
+      btnLink: "/services/cooking-help-service",
       btnText: "Read More",
     },
   ];

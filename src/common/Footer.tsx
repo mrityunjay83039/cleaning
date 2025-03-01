@@ -9,6 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import FooterBlog1 from "../assets/img/footer/footer-blog-1.png";
 import FooterBlog2 from "../assets/img/footer/footer-blog-2.png";
+import { serviceList_servicePage } from "../config/constants";
 
 const Footer = () => {
   return (
@@ -35,7 +36,8 @@ const Footer = () => {
                     </Link>
                   </Box>
                   <Typography variant="body1" className="text-white mb-35">
-                  UHC is a professional cleaning company providing cleaning services throughout British Columbia.
+                    UHC is a professional cleaning company providing cleaning
+                    services throughout British Columbia.
                   </Typography>
                   <Box className="tp-footer-info-social tp-footer-info-social-three">
                     <a
@@ -69,8 +71,6 @@ const Footer = () => {
                     >
                       <i className="fab fa-youtube"></i>
                     </a>
-
-                    
                   </Box>
                 </Box>
               </Box>
@@ -89,21 +89,16 @@ const Footer = () => {
                   Our Services
                 </Typography>
                 <ul>
-                  <li>
-                    <a href="#">Carpet Cleaning</a>
-                  </li>
-                  <li>
-                    <a href="#">Plumbing Serivices</a>
-                  </li>
-                  <li>
-                    <a href="#">Park Cleaning</a>
-                  </li>
-                  <li>
-                    <a href="#">Residential Services</a>
-                  </li>
-                  <li>
-                    <a href="#">Toilet Cleaning</a>
-                  </li>
+                  {serviceList_servicePage.slice(0,5).map((ele) => {
+                    return (
+                      <li key={ele.id}>
+                        <a href={ele.btnLink}>
+                          {ele.title}
+                      
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               </Box>
             </Grid>

@@ -11,6 +11,14 @@ import CommercialCleaning from "../frontend/services/CommercialCleaning";
 import StrataCleaning from "../frontend/services/StrataCleaning";
 import DeepCleaning from "../frontend/services/DeepCleaning";
 import MoveInOutCleaning from "../frontend/services/MoveInOutCleaning";
+import PostConstructionCleaning from "../frontend/services/PostConstructionCleaning";
+import PreSaleCleaning from "../frontend/services/PreSaleCleaning";
+import ParkadeCleaning from "../frontend/services/ParkadeCleaning";
+import ShowHomeCleaning from "../frontend/services/ShowHomeCleaning";
+import JunkRemovalCleaning from "../frontend/services/JunkRemovalCleaning";
+import PriorityCleaning from "../frontend/services/PriorityCleaning";
+import LaundryServices from "../frontend/services/LaundryServices";
+import CookingHelp from "../frontend/services/CookingHelp";
 
 const frontendRoutes = createBrowserRouter([
   {
@@ -50,18 +58,39 @@ const frontendRoutes = createBrowserRouter([
         path: "/services/move-in-move-out-cleaning-service",
         element: <MoveInOutCleaning />,
       },
-      // {
-      //   path: "/services/post-construction-post-or-post-renovation-cleaning-service",
-      //   element: <ServiceDetails />,
-      // },
-      // {
-      //   path: "/services/pre-sale-cleaning-service",
-      //   element: <ServiceDetails />,
-      // },
-      // {
-      //   path: "/services/parkade-cleaning-service",
-      //   element: <ServiceDetails />,
-      // },
+      {
+        path: "/services/post-construction-or-post-renovation-cleaning-service",
+        element: <PostConstructionCleaning />,
+      },
+      {
+        path: "/services/pre-sale-cleaning-service",
+        element: <PreSaleCleaning />,
+      },
+      {
+        path: "/services/parkade-cleaning-service",
+        element: <ParkadeCleaning />,
+      },
+      {
+        path: "/services/show-home-cleaning-service",
+        element: <ShowHomeCleaning />,
+      },
+      {
+        path: "/services/junk-removal-cleaning-service",
+        element: <JunkRemovalCleaning />,
+      },
+      {
+        path: "/services/priority-cleaning-service",
+        element: <PriorityCleaning />,
+      },
+      {
+        path: "/services/laundry-service",
+        element: <LaundryServices />,
+      },
+      {
+        path: "/services/cooking-help-service",
+        element: <CookingHelp />,
+      },
+
       {
         path: "/contact-us",
         element: <ContactUs />,

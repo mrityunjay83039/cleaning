@@ -3,14 +3,13 @@ import SliderBg3 from "../../assets/img/slider/slider-bg-3.jpg";
 import SliderImg3 from "../../assets/img/before-after/3.webp";
 import SliderImg2 from "../../assets/img/before-after/2.webp";
 import SliderImg1 from "../../assets/img/before-after/1.webp";
-import AboutImgShape3 from "../../assets/img/about/about-img-shape-3.png";
 import BlogImg7 from "../../assets/img/blog/blog-img-7.jpg";
 import BlogImg8 from "../../assets/img/blog/blog-img-8.jpg";
 import BlogImg9 from "../../assets/img/blog/blog-img-9.jpg";
 import Testimonial from "../../common/Testimonial";
 import { Link } from "react-router-dom";
 import Service from "../../common/service";
-import { serviceList } from "../../config/constants";
+import { serviceList_servicePage } from "../../config/constants";
 
 const HomePage = () => {
   return (
@@ -28,7 +27,7 @@ const HomePage = () => {
                 <img
                   src={SliderImg3}
                   className="img-fluid"
-                  alt="img not found"
+                  alt="Slider Image Three"
                 />
               </div>
               <div className="container">
@@ -78,7 +77,7 @@ const HomePage = () => {
                 <img
                   src={SliderImg2}
                   className="img-fluid"
-                  alt="img not found"
+                  alt="Slider Image Two"
                 />
               </div>
               <div className="container">
@@ -129,7 +128,7 @@ const HomePage = () => {
                 <img
                   src={SliderImg1}
                   className="img-fluid"
-                  alt="img not found"
+                  alt="Slider Image One"
                 />
               </div>
               <div className="container">
@@ -229,15 +228,14 @@ const HomePage = () => {
                   src="./img/service/commercial-cleaning-service.png"
                   className="img-fluid"
                   alt="about image"
-                  style={{width:'70%'}}
+                  style={{ width: "70%" }}
                 />
                 <img
                   src="./img/service/regular-cleaning-service.jpg"
                   className="img-fluid tp-about-img-three-second"
                   alt="about image"
-                  style={{width:'60%'}}
+                  style={{ width: "60%" }}
                 />
-               
               </div>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -256,7 +254,7 @@ const HomePage = () => {
                     variant="h3"
                     className="tp-section-title-two color-theme-blue"
                   >
-Cleaning Up your Mess is Our Success
+                    Cleaning Up your Mess is Our Success
                   </Typography>
                 </div>
                 <Typography className="mb-40">
@@ -276,9 +274,7 @@ Cleaning Up your Mess is Our Success
                         <i className="flaticon-phone-call-1"></i>
                       </div>
                       <div className="tp-about-number-text">
-                        <span className="heading-color-black">
-                          Contact Now
-                        </span>
+                        <span className="heading-color-black">Contact Now</span>
                         <a
                           href="tel:+1(778)800-4455"
                           className="heading-color-black"
@@ -289,14 +285,12 @@ Cleaning Up your Mess is Our Success
                     </div>
                   </div>
                   <div className="col-sm-6">
-                  <div className="tp-about-number mb-30">
+                    <div className="tp-about-number mb-30">
                       <div className="tp-about-number-icon">
                         <i className="flaticon-email-1"></i>
                       </div>
                       <div className="tp-about-number-text">
-                        <span className="heading-color-black">
-                          Email Now
-                        </span>
+                        <span className="heading-color-black">Email Now</span>
                         <a
                           href="mailto:info@uhcservices.ca"
                           className="heading-color-black"
@@ -307,7 +301,7 @@ Cleaning Up your Mess is Our Success
                     </div>
                   </div>
                 </div>
-                <Grid container>
+                {/* <Grid container>
                   <Grid item xs={12}>
                     <div className="tp-about-three-btn text-center">
                       <Button
@@ -319,7 +313,7 @@ Cleaning Up your Mess is Our Success
                       </Button>
                     </div>
                   </Grid>
-                </Grid>
+                </Grid> */}
               </div>
             </Grid>
           </Grid>
@@ -328,7 +322,7 @@ Cleaning Up your Mess is Our Success
       {/* About Area End Here */}
 
       {/* Service Area Start Here */}
-      <section className="tp-service-area-three pt-115 pb-200 bg-gray-light">
+      <section className="tp-service-area-three pt-115 pb-85 bg-gray-light">
         <Container>
           <Grid container>
             <Grid item xs={12}>
@@ -352,7 +346,7 @@ Cleaning Up your Mess is Our Success
             </Grid>
           </Grid>
           <div className="row">
-            {serviceList.map((ele) => {
+            {serviceList_servicePage.slice(0, 6).map((ele) => {
               return (
                 <div className="col-lg-6">
                   <Service

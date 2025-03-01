@@ -11,7 +11,7 @@ const BreadCrumb = ({breadCrumTitle, pageName}) => {
             <div className="row">
                 <div className="col-12">
                     <div className="tp-page-title z-index">
-                        <h2 className="breadcrumb-title">{bTitle[0]} <span>{remainTitle}</span></h2>
+                        <h1 className="breadcrumb-title">{bTitle[0]} <span>{remainTitle}</span></h1>
                         <div className="breadcrumb-menu">
                             <nav className="breadcrumb-trail breadcrumbs">
                                 <ul className="trail-items">
