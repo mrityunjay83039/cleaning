@@ -2,13 +2,17 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { apiSlice } from "./interceptor/apiSlice";
 import loaderReducer from "../redux/reducer/loader";
 import commonResMessage from "../redux/reducer/commonResMessage";
+import authReducer from '../redux/reducer/auth';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
+import { authPersistConfig } from "./config";
+import { AuthState } from "../redux/reducer/auth"; // Import AuthState type
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     loader: loaderReducer,
     message: commonResMessage,
+    auth: persistReducer<AuthState>(authPersistConfig, authReducer),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

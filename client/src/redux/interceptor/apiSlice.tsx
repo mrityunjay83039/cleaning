@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery, RootState } from "@reduxjs/toolkit/query/react";
 import { baseConfig } from "../../config/base-config";
 import { setLoader, setProgress } from "../reducer/loader";
 import { setMessage } from "../reducer/commonResMessage";
@@ -12,14 +12,10 @@ const baseQuery = fetchBaseQuery({
       `max-age=86400; includeSubDomains`
     );
 
-    let token;
+    const token = getState().auth.token;
     if (token) {
-      localStorage.setItem("authToken", token);
       headers.set("authorization", `Bearer ${token}`);
-    } else {
-      token = localStorage.getItem("authToken");
-      headers.set("authorization", `Bearer ${token}`);
-    }
+    } 
     return headers;
   },
 });

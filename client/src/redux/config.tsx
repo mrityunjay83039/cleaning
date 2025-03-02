@@ -10,3 +10,9 @@ export const permissionsPersistConfig = {
     storage,
     // transforms: [encryptor]
   };
+
+  export const authPersistConfig = {
+    key: 'tkt',
+    storage,
+    // transforms: [encryptor]
+  };

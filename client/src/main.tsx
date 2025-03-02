@@ -9,6 +9,7 @@ import './assets/css/swiper-bundle.css'
 import './assets/css/venobox.min.css'
 import './assets/css/flaticon.css'
 import './assets/css/fontawesome.min.css'
+import 'react-toastify/dist/ReactToastify.css';
 import App from "./App.tsx";
 import { Provider } from "react-redux";
 import { persistor, store } from "./redux/Store.tsx";
