@@ -20,6 +20,10 @@ import PriorityCleaning from "../frontend/services/PriorityCleaning";
 import LaundryServices from "../frontend/services/LaundryServices";
 import CookingHelp from "../frontend/services/CookingHelp";
 import Login from "../frontend/login";
+import Dashboard from "../frontend/dashboard";
+import Profile from "../frontend/dashboard/Profile";
+import ProtectedRoutes from "../utils/ProtectedRoute";
+import Logout from "./Logout";
 
 const frontendRoutes = createBrowserRouter([
   {
@@ -103,7 +107,25 @@ const frontendRoutes = createBrowserRouter([
       {
         path: "/adminlogin",
         element: <Login />,
-        },
+      },
+      {
+        path: "/logout",
+        element: <Logout />,
+      }
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoutes>
+        <Dashboard />
+      </ProtectedRoutes>
+    ),
+    children: [
+      {
+        path: "/dashboard/profile",
+        element: <Profile />,
+      },
     ],
   },
 ]);
