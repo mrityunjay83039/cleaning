@@ -1,13 +1,19 @@
-import { Link } from "react-router-dom"
+import React from 'react';
+import Sidebar from './DashboardSidebar';
+import TopBar from './DashboardTopBar';
+import { Box } from '@mui/material';
 
-
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   return (
-    <div>
-      Welcome to Admin Panel | 
-      <Link to="/logout"> Logout</Link>
-    </div>
-  )
-}
+    <Box sx={{ display: 'flex' }}>
+      <Sidebar />
+      <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
+        <TopBar />
+        <h1>Welcome to the Dashboard</h1>
+        {/* Add more dashboard content here */}
+      </Box>
+    </Box>
+  );
+};
 
-export default Dashboard
+export default Dashboard;

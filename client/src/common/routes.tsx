@@ -24,6 +24,7 @@ import Dashboard from "../frontend/dashboard";
 import Profile from "../frontend/dashboard/Profile";
 import ProtectedRoutes from "../utils/ProtectedRoute";
 import Logout from "./Logout";
+import DashboardLayout from "../frontend/dashboard/DashboardLayout";
 
 const frontendRoutes = createBrowserRouter([
   {
@@ -118,12 +119,12 @@ const frontendRoutes = createBrowserRouter([
     path: "/dashboard",
     element: (
       <ProtectedRoutes>
-        <Dashboard />
+        <DashboardLayout />
       </ProtectedRoutes>
     ),
     children: [
       {
-        path: "/dashboard/profile",
+        path: "profile",
         element: <Profile />,
       },
     ],
