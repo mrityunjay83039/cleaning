@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^44.3.0",
+    "@ckeditor/ckeditor5-react": "^9.5.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@hookform/resolvers": "^4.1.2",
     "@mui/material": "^6.4.2",
     "@reduxjs/toolkit": "^2.5.1",
+    "@tinymce/tinymce-react": "^6.0.0",
     "bootstrap": "^5.3.3",
     "dayjs": "^1.11.13",
     "moment": "^2.30.1",
@@ -44,5 +47,11 @@
     "typescript": "~5.7.3",
     "typescript-eslint": "^8.22.0",
     "vite": "^6.0.11"
+  },
+  "overrides": {
+    "@tinymce/tinymce-react": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   }
 }

@@ -25,6 +25,8 @@ import Profile from "../frontend/dashboard/Profile";
 import ProtectedRoutes from "../utils/ProtectedRoute";
 import Logout from "./Logout";
 import DashboardLayout from "../frontend/dashboard/DashboardLayout";
+import Blog from "../frontend/dashboard/blog";
+import AddPosts from "../frontend/dashboard/blog/AddPosts";
 
 const frontendRoutes = createBrowserRouter([
   {
@@ -124,9 +126,19 @@ const frontendRoutes = createBrowserRouter([
     ),
     children: [
       {
-        path: "profile",
-        element: <Profile />,
+        path: "/dashboard",
+        element: <Dashboard />,
+        index:true
       },
+      {
+        path: "blog",
+        element: <Blog />,
+
+      },
+      {
+        path: "blog/add",
+        element: <AddPosts/>
+      }
     ],
   },
 ]);
