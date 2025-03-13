@@ -7,23 +7,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Editor } from "@tinymce/tinymce-react";
 import { useState } from "react";
 import { useAddPostMutation } from "../../../redux/services/blog";
+import CloudinaryUploadWidget from "../../../common/form-components/CloudinaryUploadWidget";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 
 const AddPosts = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [content, setContent] = useState("");
+  const [imagePath, setImagePath] = useState("");
 
   const [addPost] = useAddPostMutation();
 
-  const handleEditorChange = (newContent) => {
-    setContent(newContent);
-    console.log("Editor Content:", newContent);
-  };
   const defaultValue = {
     title: "",
     imageUrl: "",
     categoryTitle: "",
-    categoryId: "",
+    // categoryId: "",
     blogDetail: "",
   };
 
@@ -41,13 +41,14 @@ const AddPosts = () => {
     register,
   } = methods;
 
-  const onSubmitHandler = async (value) => {
-    const neValue = {
-        ...value,
-        blogDetail: content,
-    }
+  const handleEditorChange = (newContent) => {
+    setContent(newContent);
+    setValue("blogDetail", newContent);
+  };
+
+  const onSubmitHandler = async (value: any) => {
     try {
-      const res = await addPost(neValue);
+      const res = await addPost(value);
       console.log("add post response:", res); // Log the response
 
       if (res && res.data) {
@@ -56,18 +57,55 @@ const AddPosts = () => {
         toast.success("Post added successfully", {
           position: "top-center",
         });
-        // dispatch(setToken(token));
-        // dispatch(setCredential(res.data));
-        // navigate("/dashboard");
       }
     } catch (error) {
       console.error("addpost:", error); // Log the error
-      toast.error("An error occurred during login. Please try again.", {
-        position: "top-center",
-      });
     }
   };
 
+  const handleImageChange = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    const cloudName = import.meta.env.VITE_CLOUD_NAME;
+    const uploadPreset = import.meta.env.VITE_UPLOAD_PRESET;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", uploadPreset);
+    formData.append("cloud_name", cloudName);
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    const fileObj = await res.json();
+    console.log("image: ", fileObj?.url);
+    setImagePath(fileObj.url);
+    setValue("imageUrl", fileObj.url);
+  };
+
+  // Upload Widget Configuration
+  // const uwConfig = {
+  //   cloudName,
+  //   uploadPreset,
+  //   // Uncomment and modify as needed:
+  //   // cropping: true,
+  //   // showAdvancedOptions: true,
+  //   // sources: ['local', 'url'],
+  //   // multiple: false,
+  //   // folder: 'user_images',
+  //   // tags: ['users', 'profile'],
+  //   // context: { alt: 'user_uploaded' },
+  //   // clientAllowedFormats: ['images'],
+  //   // maxImageFileSize: 2000000,
+  //   // maxImageWidth: 2000,
+  //   // theme: 'purple',
+  // };
+  console.log("imageUrl: ", getValues("imageUrl"));
+  console.log("blogDetail: ", getValues("blogDetail"));
   return (
     <Card className="max-w-lg mx-auto p-6 shadow-md rounded-2xl">
       <CardContent>
@@ -92,12 +130,14 @@ const AddPosts = () => {
                   <div className="tp-contact-form-field mb-20">
                     <input
                       type="file"
-                      {...register("imageUrl", { required: true })}
                       placeholder="Image"
+                      onChange={(e) => handleImageChange(e)}
                     />
-                    {errors?.imageUrl && (
+                    <img src={imagePath} style={{ width: "100%" }} />
+
+                    {/* {errors?.imageUrl && (
                       <div className="text-danger">Image is required</div>
-                    )}
+                    )} */}
                   </div>
                 </div>
 
