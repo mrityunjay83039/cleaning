@@ -1,6 +1,7 @@
 import { CardMedia } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from '../../assets/img/logo/logo.png'
 
 const DashboardSidebar: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ const DashboardSidebar: React.FC = () => {
         <div className="sidebar-brand-icon">
           <CardMedia
             component="img"
-            image="./logo.png"
+            image={logo}
             alt="Logo"
             sx={{ width: "50px" }}
           />

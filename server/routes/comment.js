@@ -28,10 +28,10 @@ router.post("/", checkAuth, async (req, res) => {
     });
 
     const result = await newComment.save();
-    res.status(201).json({ newComment: result });
+    res.status(201).json({ success: true, newComment: result });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 });
 
@@ -47,13 +47,13 @@ router.put("/:id", checkAuth, async (req, res) => {
     );
 
     if (!updatedComment) {
-      return res.status(400).json({ msg: "Comment not found" });
+      return res.status(400).json({ success: false, msg: "Comment not found" });
     }
 
     res.status(200).json({ updatedComment });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 });
 
@@ -68,13 +68,15 @@ router.delete("/:id", checkAuth, async (req, res) => {
     });
 
     if (result.deletedCount === 0) {
-      return res.status(400).json({ msg: "Comment not found or unauthorized" });
+      return res
+        .status(400)
+        .json({ success: false, msg: "Comment not found or unauthorized" });
     }
 
-    res.status(200).json({ msg: "Comment deleted" });
+    res.status(200).json({ success: true, msg: "Comment deleted" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 });
 
@@ -85,10 +87,10 @@ router.get("/getblogscomment/:blogId", async (req, res) => {
       "_id userId blogId userName comment"
     );
 
-    res.status(200).json({ comments });
+    res.status(200).json({ success: true, comments: comments });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 });
 

@@ -12,7 +12,8 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     loader: loaderReducer,
     message: commonResMessage,
-    auth: persistReducer<AuthState>(authPersistConfig, authReducer),
+    auth: authReducer,
+    // auth: persistReducer<AuthState>(authPersistConfig, authReducer),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

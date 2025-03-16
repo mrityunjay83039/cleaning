@@ -30,9 +30,9 @@ router.post("/", checkAuth, async (req, res) => {
       userName: `${verify.firstName} ${verify.lastName}`,
     });
     const result = await newBlog.save();
-    res.status(201).json({ newBlog: result });
+    res.status(201).json({ success: true, newBlog: result });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -42,9 +42,9 @@ router.get("/getallblogs", async (req, res) => {
     const blogs = await Blog.find().select(
       "_id userId categoryId categoryTitle title imageUrl userName blogDetail"
     );
-    res.status(200).json({ blogs });
+    res.status(200).json({ success: true, blogs: blogs });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -53,10 +53,12 @@ router.get("/getblogsbycategory/:id", async (req, res) => {
   try {
     const blogs = await Blog.find({ categoryId: req.params.id });
     if (!blogs.length)
-      return res.status(404).json({ msg: "No blogs found in this category" });
-    res.status(200).json({ blogs });
+      return res
+        .status(404)
+        .json({ success: false, msg: "No blogs found in this category" });
+    res.status(200).json({ success: true, blogs: blogs });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -67,9 +69,9 @@ router.get("/", checkAuth, async (req, res) => {
     const blogList = await Blog.find({ userId: verify.userId }).select(
       "_id userId categoryId categoryTitle title imageUrl userName blogDetail"
     );
-    res.status(200).json({ blogList });
+    res.status(200).json({ success: true, blogList: blogList });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -82,10 +84,12 @@ router.delete("/:id", checkAuth, async (req, res) => {
       userId: verify.userId,
     });
     if (result.deletedCount === 0)
-      return res.status(401).json({ msg: "Blog not found or unauthorized" });
-    res.status(200).json({ msg: "Blog deleted" });
+      return res
+        .status(401)
+        .json({ success: false, msg: "Blog not found or unauthorized" });
+    res.status(200).json({ success: true, msg: "Blog deleted" });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -108,10 +112,12 @@ router.put("/:id", checkAuth, async (req, res) => {
       { new: true }
     );
     if (!updatedBlog)
-      return res.status(404).json({ msg: "Blog not found or unauthorized" });
-    res.status(200).json({ updatedBlog });
+      return res
+        .status(404)
+        .json({ success: false, msg: "Blog not found or unauthorized" });
+    res.status(200).json({ success: true, updatedBlog: updatedBlog });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 

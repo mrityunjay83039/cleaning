@@ -36,10 +36,11 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
       setMessage({ status: true, type: "error", message: "API Not Found" })
     );
   } else if (result?.error?.status === 403) {
+    debugger;
     if (typeof args.loader === "undefined" || args.loader === true) {
       nprogress.complete(args, api);
     }
-    const refreshResult = await baseQuery("/refresh", api, extraOptions);
+    const refreshResult = await baseQuery("/user/refresh", api, extraOptions);
     if (refreshResult?.data) {
       result = await baseQuery(args, api, extraOptions);
     }

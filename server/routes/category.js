@@ -26,10 +26,10 @@ router.post("/", checkAuth, async (req, res) => {
     });
 
     const result = await newCategory.save();
-    res.status(201).json({ newCategory: result });
+    res.status(201).json({ success: false, newCategory: result });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -40,10 +40,10 @@ router.get("/", checkAuth, async (req, res) => {
     const categories = await Category.find({ userId: verify.userId }).select(
       "_id userId title imageUrl"
     );
-    res.status(200).json({ categoryList: categories });
+    res.status(200).json({ success: true, categoryList: categories });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -57,12 +57,14 @@ router.delete("/:id", checkAuth, async (req, res) => {
     });
 
     if (result.deletedCount === 0) {
-      return res.status(404).json({ msg: "Category not found" });
+      return res
+        .status(404)
+        .json({ success: false, msg: "Category not found" });
     }
-    res.status(200).json({ msg: "Category deleted" });
+    res.status(200).json({ success: true, msg: "Category deleted" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -77,12 +79,14 @@ router.put("/:id", checkAuth, async (req, res) => {
     );
 
     if (!updatedCategory) {
-      return res.status(404).json({ msg: "Category not found" });
+      return res
+        .status(404)
+        .json({ success: false, msg: "Category not found" });
     }
-    res.status(200).json({ updatedCategory });
+    res.status(200).json({ success: true, updatedCategory: updatedCategory });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 

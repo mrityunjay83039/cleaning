@@ -35,14 +35,14 @@ export const authApi = apiSlice.injectEndpoints({
       }),
     }),
   
-    // AmsLogout: builder.mutation<Login, Partial<Login>>({
-    //   query: (body) => ({
-    //     url: ApiRouteService.amsLogout,
-    //     method: "POST",
-    //     body,
-    //   }),
-    // }),
+    UserLogout: builder.mutation<Login, Partial<Login>>({
+      query: (body) => ({
+        url: ApiRouteService.logout,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useUserLogoutMutation } = authApi;

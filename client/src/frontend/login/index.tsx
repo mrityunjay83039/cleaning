@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useLoginMutation } from "../../redux/services/auth";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setCredential, setToken } from "../../redux/reducer/auth";
+import { setCredential, setToken, setRefreshToken } from "../../redux/reducer/auth";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import {
   loginFormInput,
@@ -46,17 +46,19 @@ const Login = () => {
   } = methods;
 
   const onSubmitHandler: SubmitHandler<loginFormInput> = async (value) => {
+    debugger;
     try {
       const res = await login(value);
       console.log("Login response:", res); // Log the response
 
-      if (res && res.data && res.data.token) {
-        const token = res.data.token;
+      if (res && res.data && res.data.accessToken) {
+        const token = res.data.accessToken;
 
         toast.success("You are now logged in", {
           position: "top-center",
         });
         dispatch(setToken(token));
+        dispatch(setRefreshToken(res?.data?.refreshToken))
         dispatch(setCredential(res.data));
         navigate("/dashboard");
       } else {
