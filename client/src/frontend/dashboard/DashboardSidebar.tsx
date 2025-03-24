@@ -40,13 +40,23 @@ const DashboardSidebar: React.FC = () => {
 
       {/* <!-- Nav Item - Pages Collapse Menu --> */}
       <li className="nav-item">
-        <Link className="nav-link collapsed" to="/dashboard/blog">
-          <span>Blog Posts</span>
+        <Link className="nav-link collapsed" to="/dashboard/categories">
+          <span>Categories</span>
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link collapsed" to="/dashboard/add-category">
+          <span>Add Category</span>
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link collapsed" to="/dashboard/blogs">
+          <span>Blogs</span>
         </Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link collapsed" to="/dashboard/blog/add">
-          <span>Add Posts</span>
+          <span>Add New Blog</span>
         </Link>
       </li>
 

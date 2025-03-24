@@ -3,4 +3,5 @@ export const ApiRouteService = {
   logout: "user/logout",
   addPost: "blog",
   allBlogs: "blog/getallblogs",
+  category: "category"
 };

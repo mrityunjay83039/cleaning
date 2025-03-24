@@ -46,7 +46,6 @@ const Login = () => {
   } = methods;
 
   const onSubmitHandler: SubmitHandler<loginFormInput> = async (value) => {
-    debugger;
     try {
       const res = await login(value);
       console.log("Login response:", res); // Log the response
