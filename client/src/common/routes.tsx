@@ -28,6 +28,7 @@ import DashboardLayout from "../frontend/dashboard/DashboardLayout";
 import Blog from "../frontend/dashboard/blog";
 import AddPosts from "../frontend/dashboard/blog/AddPosts";
 import Categories from "../frontend/dashboard/categories";
+import AddCategory from "../frontend/dashboard/categories/AddCategory";
 
 const frontendRoutes = createBrowserRouter([
   {
@@ -137,8 +138,7 @@ const frontendRoutes = createBrowserRouter([
       },
       {
         path: "add-category",
-        element: <Blog />,
-
+        element: <AddCategory />
       },
       {
         path: "blogs",

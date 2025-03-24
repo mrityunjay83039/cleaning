@@ -15,7 +15,15 @@ export const categoryApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    addCategory: builder.mutation<any, any>({
+      query: (data) => ({
+        url: ApiRouteService.category,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllCategoriesMutation } = categoryApi;
+export const { useGetAllCategoriesMutation, useAddCategoryMutation } = categoryApi;

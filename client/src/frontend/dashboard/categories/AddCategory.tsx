@@ -10,14 +10,15 @@ import { useAddPostMutation } from "../../../redux/services/blog";
 import CloudinaryUploadWidget from "../../../common/form-components/CloudinaryUploadWidget";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
+import { useAddCategoryMutation } from "../../../redux/services/categories";
 
-const AddPosts = () => {
+const AddCategory = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [content, setContent] = useState("");
   const [imagePath, setImagePath] = useState("");
 
-  const [addPost] = useAddPostMutation();
+  const [addCategory] = useAddCategoryMutation();
 
   const defaultValue = {
     title: "",
@@ -48,9 +49,8 @@ const AddPosts = () => {
 
   const onSubmitHandler = async (value: any) => {
     try {
-      const res = await addPost(value);
-      console.log("add post response:", res); // Log the response
-
+      const res = await addCategory(value);
+      console.log("Add Category Response:", res);
       if (res && res.data) {
         // const token = res.data.token;
 
@@ -87,29 +87,12 @@ const AddPosts = () => {
     setValue("imageUrl", fileObj.url);
   };
 
-  // Upload Widget Configuration
-  // const uwConfig = {
-  //   cloudName,
-  //   uploadPreset,
-  //   // Uncomment and modify as needed:
-  //   // cropping: true,
-  //   // showAdvancedOptions: true,
-  //   // sources: ['local', 'url'],
-  //   // multiple: false,
-  //   // folder: 'user_images',
-  //   // tags: ['users', 'profile'],
-  //   // context: { alt: 'user_uploaded' },
-  //   // clientAllowedFormats: ['images'],
-  //   // maxImageFileSize: 2000000,
-  //   // maxImageWidth: 2000,
-  //   // theme: 'purple',
-  // };
   console.log("imageUrl: ", getValues("imageUrl"));
   console.log("blogDetail: ", getValues("blogDetail"));
   return (
     <Card className="max-w-lg mx-auto p-6 shadow-md rounded-2xl">
       <CardContent>
-        <h2 className="text-xl font-bold mb-4">Add New Blog Post</h2>
+        <h2 className="text-xl font-bold mb-4">Add New Category</h2>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmitHandler)}>
             <div className="">
@@ -119,7 +102,7 @@ const AddPosts = () => {
                     <input
                       type="text"
                       {...register("title", { required: true })}
-                      placeholder="Blog Title"
+                      placeholder="Category Title"
                     />
                     {errors?.title && (
                       <div className="text-danger">Title is required</div>
@@ -134,46 +117,6 @@ const AddPosts = () => {
                       onChange={(e) => handleImageChange(e)}
                     />
                     <img src={imagePath} style={{ width: "100%" }} />
-
-                    {/* {errors?.imageUrl && (
-                      <div className="text-danger">Image is required</div>
-                    )} */}
-                  </div>
-                </div>
-
-                <div className="col-md-12 custom-pad-20">
-                  <div className="tp-contact-form-field mb-20">
-                    <input
-                      type="text"
-                      {...register("categoryTitle", { required: true })}
-                      placeholder="Category"
-                    />
-                    {errors?.categoryTitle && (
-                      <div className="text-danger">Category is required</div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="col-md-12 custom-pad-20">
-                  <div className="tp-contact-form-field mb-20">
-                    <Editor
-                      apiKey="6rq58torrow1webfnxy8wn0e6zqtzjoemmprd735oh84809n" // Replace with your API Key or remove for self-hosted
-                      initialValue="<p>Start typing here...</p>"
-                      init={{
-                        height: 400,
-                        menubar: true,
-                        plugins: [
-                          "advlist autolink lists link image charmap print preview anchor",
-                          "searchreplace visualblocks code fullscreen",
-                          "insertdatetime media table paste code help wordcount",
-                        ],
-                        toolbar:
-                          "undo redo | formatselect | bold italic backcolor | \
-            alignleft aligncenter alignright alignjustify | \
-            bullist numlist outdent indent | removeformat | help",
-                      }}
-                      onEditorChange={handleEditorChange}
-                    />
                   </div>
                 </div>
 
@@ -197,4 +140,4 @@ const AddPosts = () => {
   );
 };
 
-export default AddPosts;
+export default AddCategory;
