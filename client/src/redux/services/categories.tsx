@@ -23,7 +23,37 @@ export const categoryApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+
+    getCategoryById: builder.query({
+      query: (id) => ({
+        url: `${ApiRouteService.category}/${id}`,
+        method: "GET",
+      }),
+    }),
+
+    // Update Category
+    updateCategory: builder.mutation({
+      query: ({ id, updatedData }) => ({
+        url: `${ApiRouteService.category}/${id}`,
+        method: "PUT",
+        body: updatedData,
+      }),
+    }),
+
+    // Delete Category
+    deleteCategory: builder.mutation({
+      query: (id) => ({
+        url: `${ApiRouteService.category}/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useGetAllCategoriesMutation, useAddCategoryMutation } = categoryApi;
+export const { 
+  useGetAllCategoriesMutation, 
+  useGetCategoryByIdQuery, 
+  useAddCategoryMutation, 
+  useUpdateCategoryMutation, 
+  useDeleteCategoryMutation 
+} = categoryApi;

@@ -47,6 +47,30 @@ router.get("/", checkAuth, async (req, res) => {
   }
 });
 
+// Get Category by ID
+router.get("/:id", checkAuth, async (req, res) => {
+  try {
+    const verify = verifyToken(req);
+    const categoryId = req.params.id;
+
+    const category = await Category.findOne({
+      _id: categoryId,
+      userId: verify.userId,
+    }).select("_id userId title imageUrl");
+
+    if (!category) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Category not found" });
+    }
+
+    res.status(200).json({ success: true, category });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Delete Category
 router.delete("/:id", checkAuth, async (req, res) => {
   try {
