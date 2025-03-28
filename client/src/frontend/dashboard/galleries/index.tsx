@@ -6,25 +6,25 @@ import {
   useMaterialReactTable,
 } from "material-react-table";
 import { MenuItem } from "@mui/material";
-import { useDeleteJobMutation, useGetAllJobsQuery } from "../../../redux/services/job";
+import { useDeleteGalleryMutation, useGetAllGalleriesQuery } from "../../../redux/services/gallery";
 
-const Job: React.FC = () => {
+const Gallery: React.FC = () => {
   const navigate = useNavigate();
 
-  const { data: JobData, isLoading, isError, refetch } = useGetAllJobsQuery();
+  const { data: GalleryData, isLoading, isError, refetch } = useGetAllGalleriesQuery();
 
-  console.log("JobData: ", JobData);
+  console.log("galleryData: ", GalleryData);
   
-  const [deleteJob] = useDeleteJobMutation();
+  const [deleteGallery] = useDeleteGalleryMutation();
 
   const handleDeleteClick = useCallback(async (id: string) => {
     try {
-      const res = await deleteJob(id);
+      const res = await deleteGallery(id);
       await refetch();
     } catch (error) {
       console.error("Delete blog error:", error);
     }
-  }, [deleteJob]);
+  }, [deleteGallery]);
 
   const handleDeleteConfirmation = (id: string) => {
     if (window.confirm("Are you sure you want to delete this job?")) {
@@ -62,19 +62,19 @@ const Job: React.FC = () => {
 
   const table = useMaterialReactTable({
     columns,
-    data: JobData?.jobs || [],
+    data: GalleryData?.galleries || [],
     enableRowActions: true,
     positionActionsColumn: "last",
     renderTopToolbarCustomActions: () => (
       <button
-        onClick={() => navigate("/dashboard/job/add")}
+        onClick={() => navigate("/dashboard/gallery/add")}
         className="add-new-button"
       >
-        + Add New Job
+        + Add New Gallery
       </button>
     ),
     renderRowActionMenuItems: ({ row }) => [
-      <MenuItem key="edit" onClick={() => navigate(`/dashboard/edit-job/${row.original._id}`)}>
+      <MenuItem key="edit" onClick={() => navigate(`/dashboard/edit-gallery/${row.original._id}`)}>
         Edit
       </MenuItem>,
       <MenuItem key="delete" onClick={() => handleDeleteConfirmation(row.original._id)}>
@@ -86,4 +86,4 @@ const Job: React.FC = () => {
   return <MaterialReactTable table={table} />;
 };
 
-export default Job;
+export default Gallery;

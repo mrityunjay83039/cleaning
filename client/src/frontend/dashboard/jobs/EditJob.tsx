@@ -12,39 +12,31 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
-import { useGetBlogByIdQuery, useUpdatePostMutation } from "../../../redux/services/blog";
-import { useGetAllCategoriesQuery } from "../../../redux/services/categories";
+import { useGetJobByIdQuery, useUpdateJobMutation } from "../../../redux/services/job";
 
-interface PostFormData {
+interface JobFormData {
   title: string;
   imageUrl: string;
-  categoryTitle: string;
-  categoryId: string;
-  blogDetail: string;
+  jobDetail: string;
   authorName: string;
 }
 
-const EditPost = () => {
+const EditJob = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data, error, isLoading, refetch } = useGetBlogByIdQuery(id);
+  const { data, error, isLoading, refetch } = useGetJobByIdQuery(id);
   console.log("data: ", data);
-  
-  const { data: categories, isLoading: isCategoriesLoading } = useGetAllCategoriesQuery();
-  const categoryList = categories?.categoryList || [];
 
-  const [updatePost] = useUpdatePostMutation();
+  const [updatePost] = useUpdateJobMutation();
   const [imagePath, setImagePath] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [formSubmitting, setFormSubmitting] = useState(false);
 
-  const methods = useForm<PostFormData>({
+  const methods = useForm<JobFormData>({
     defaultValues: {
       title: "",
       imageUrl: "",
-      categoryTitle: "",
-      categoryId: "",
-      blogDetail: "",
+      jobDetail: "",
       authorName: "",
     },
   });
@@ -52,16 +44,14 @@ const EditPost = () => {
   const { reset, handleSubmit, setValue, getValues, formState: { errors }, register, control } = methods;
 
   useEffect(() => {
-    if (data?.blog) {
+    if (data?.job) {
       reset({
-        title: data.blog.title || "", 
-        imageUrl: data.blog.imageUrl || "",
-        categoryTitle: data.blog.categoryTitle || "",
-        categoryId: data.blog.categoryId || "", 
-        blogDetail: data.blog.blogDetail || "",
-        authorName: data.blog.authorName || "",
+        title: data.job.title || "", 
+        imageUrl: data.job.imageUrl || "", 
+        jobDetail: data.job.jobDetail || "",
+        authorName: data.job.authorName || "",
       });
-      setImagePath(data.blog.imageUrl || "");
+      setImagePath(data.job.imageUrl || "");
     }
   }, [data, reset, setValue]);
 
@@ -69,7 +59,7 @@ const EditPost = () => {
   if (error) return <p>Error fetching post</p>;
 
   const handleEditorChange = (newContent) => {
-    setValue("blogDetail", newContent);
+    setValue("jobDetail", newContent);
   };
 
   const handleImageChange = async (event) => {
@@ -111,11 +101,11 @@ const EditPost = () => {
     try {
       await updatePost({ id, updatedData });
       await refetch();
-      toast.success("Post updated successfully");
-      navigate(`/dashboard/blogs`);
+      toast.success("Job updated successfully");
+      navigate(`/dashboard/jobs`);
     } catch (error) {
       console.error("Update error: ", error);
-      toast.error("Failed to update post");
+      toast.error("Failed to update job");
     } finally {
       setFormSubmitting(false);
     }
@@ -124,7 +114,7 @@ const EditPost = () => {
   return (
     <Card className="max-w-lg mx-auto p-6 shadow-md rounded-2xl">
       <CardContent>
-        <h2 className="text-xl font-bold mb-4">Edit Blog Post</h2>
+        <h2 className="text-xl font-bold mb-4">Edit Job</h2>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmitHandler)}>
             {/* Blog Title */}
@@ -133,7 +123,7 @@ const EditPost = () => {
               control={control}
               rules={{ required: "Title is required" }}
               render={({ field }) => (
-                <TextField {...field} label="Blog Title" fullWidth margin="normal" error={!!errors.title} helperText={errors.title?.message} />
+                <TextField {...field} label="Job Title" fullWidth margin="normal" error={!!errors.title} helperText={errors.title?.message} />
               )}
             />
 
@@ -141,48 +131,12 @@ const EditPost = () => {
             <div>
               <input type="file" onChange={handleImageChange} className="w-full p-2 border" />
             </div>
-            {isUploading ? <CircularProgress size={24} className="mt-4" /> : imagePath && <img src={imagePath} alt="Uploaded" className="w-full mt-2" />}
-
-            {/* Category Selection */}
-            <Controller
-              name="categoryId"
-              control={control}
-              defaultValue=""
-              rules={{ required: "Category is required" }}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  fullWidth
-                  displayEmpty
-                  value={field.value || ""} // Ensure it's controlled
-                  onChange={(event) => {
-                    const selectedCategory = categoryList.find(cat => cat._id === event.target.value);
-                    setValue("categoryTitle", selectedCategory?.title || ""); 
-                    setValue("categoryId", event.target.value); // Set correct categoryId
-                  }}
-                  className="mt-4 mb-4"
-                >
-                  <MenuItem value="" disabled>Select a Category</MenuItem>
-                  {isCategoriesLoading ? (
-                    <MenuItem disabled>Loading...</MenuItem>
-                  ) : categoryList.length > 0 ? (
-                    categoryList.map((category) => (
-                      <MenuItem key={category._id} value={category._id}>
-                        {category.title}
-                      </MenuItem>
-                    ))
-                  ) : (
-                    <MenuItem disabled>No categories available</MenuItem>
-                  )}
-                </Select>
-              )}
-            />
-            {errors.categoryTitle && <div className="text-red-500">{errors.categoryTitle.message}</div>}
+            {isUploading ? <CircularProgress size={24} className="mt-4" /> : imagePath && <img src={imagePath} alt="Uploaded" className="w-full mt-2 mb-2" />}
 
             {/* Blog Content Editor */}
             <Editor
               apiKey="6rq58torrow1webfnxy8wn0e6zqtzjoemmprd735oh84809n"
-              initialValue={getValues("blogDetail")}
+              initialValue={getValues("jobDetail")}
               init={{
                 height: 400,
                 menubar: true,
@@ -198,8 +152,8 @@ const EditPost = () => {
             />
 
             {/* Submit Button */}
-            <Button type="submit" variant="contained" disabled={formSubmitting} className="w-full">
-              {formSubmitting ? <CircularProgress size={24} /> : "Update Post"}
+            <Button type="submit" variant="contained" disabled={formSubmitting} className="w-full mt-4">
+              {formSubmitting ? <CircularProgress size={24} /> : "Update Job"}
             </Button>
           </form>
         </FormProvider>
@@ -208,4 +162,4 @@ const EditPost = () => {
   );
 };
 
-export default EditPost;
+export default EditJob;

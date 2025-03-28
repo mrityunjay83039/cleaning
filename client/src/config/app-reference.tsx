@@ -4,4 +4,5 @@ export const ApiRouteService = {
   category: "category",
   blog: "blog",
   job: "job",
+  gallery: "gallery",
 };

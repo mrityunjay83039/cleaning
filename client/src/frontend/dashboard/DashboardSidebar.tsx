@@ -49,6 +49,17 @@ const DashboardSidebar: React.FC = () => {
           <span>Blogs</span>
         </Link>
       </li>
+      <li className="nav-item">
+        <Link className="nav-link collapsed" to="/dashboard/jobs">
+          <span>Jobs</span>
+        </Link>
+      </li>
+
+      <li className="nav-item">
+        <Link className="nav-link collapsed" to="/dashboard/galleries">
+          <span>Gallery Images</span>
+        </Link>
+      </li>
 
       {/* <!-- Divider --> */}
       <hr className="sidebar-divider" />

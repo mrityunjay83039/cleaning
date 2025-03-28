@@ -4,87 +4,76 @@ import { apiSlice } from "../interceptor/apiSlice";
 export interface Job {
   id: string;
   title: string;
-  slug: string;
   imageUrl: string;
   jobDetail: string;
   authorName: string;
   createdAt: string;
 }
 
-export interface AddPostRequest {
+export interface AddJobRequest {
   title: string;
   imageUrl: string;
-  categoryTitle: string;
-  categoryId: string;
-  blogDetail: string;
+  jobDetail: string;
   authorName: string;
 }
 
-export interface UpdatePostRequest {
+export interface UpdateJobRequest {
   title: string;
   imageUrl: string;
-  categoryTitle: string;
-  categoryId: string;
-  blogDetail: string;
+  jobDetail: string;
   authorName: string;
 }
 
-export const blogApi = apiSlice.injectEndpoints({
+export const jobApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAllBlogs: builder.query<Blog[], void>({
+    getAllJobs: builder.query<Job[], void>({
       query: () => ({
-        url: ApiRouteService.blog,
+        url: ApiRouteService.job,
         method: "GET",
       }),
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.blogs.map(({ id }) => ({ type: "Blog", id } as const)),
-              { type: "Blog", id: "LIST" },
-            ]
-          : [{ type: "Blog", id: "LIST" }],
+      providesTags: ["Job"], // 👈 Provides a cache tag for jobs
     }),
-    
-    getBlogById: builder.query<Blog, string>({
+
+    getJobById: builder.query<Job, string>({
       query: (id) => ({
-        url: `${ApiRouteService.blog}/${id}`,
+        url: `${ApiRouteService.job}/${id}`,
         method: "GET",
       }),
-      providesTags: (result, error, id) => [{ type: "Blog", id }],
+      providesTags: (result, error, id) => [{ type: "Job", id }],
     }),
-    
-    addPost: builder.mutation<Blog, AddPostRequest>({
+
+    addJob: builder.mutation<Job, AddJobRequest>({
       query: (data) => ({
-        url: ApiRouteService.blog,
+        url: ApiRouteService.job,
         method: "POST",
         body: data,
       }),
-      invalidatesTags: [{ type: "Blog", id: "LIST" }],
+      invalidatesTags: ["Job"], // 👈 Invalidates the cache after adding a job
     }),
-    
-    updatePost: builder.mutation<Blog, UpdatePostRequest>({
+
+    updateJob: builder.mutation<Job, { id: string; updatedData: UpdateJobRequest }>({
       query: ({ id, updatedData }) => ({
-        url: `${ApiRouteService.blog}/${id}`,
+        url: `${ApiRouteService.job}/${id}`,
         method: "PUT",
         body: updatedData,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "Blog", id }, { type: "Blog", id: "LIST" }],
+      invalidatesTags: (result, error, { id }) => [{ type: "Job", id }, "Job"], // 👈 Refresh specific and all jobs
     }),
-    
-    deletePost: builder.mutation<void, string>({
+
+    deleteJob: builder.mutation<void, string>({
       query: (id) => ({
-        url: `${ApiRouteService.blog}/${id}`,
+        url: `${ApiRouteService.job}/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, id) => [{ type: "Blog", id }, { type: "Blog", id: "LIST" }],
+      invalidatesTags: ["Job"], // 👈 Refresh job list after deletion
     }),
   }),
 });
 
 export const { 
-  useGetAllBlogsQuery, 
-  useAddPostMutation, 
-  useGetBlogByIdQuery,
-  useUpdatePostMutation, 
-  useDeletePostMutation 
-} = blogApi;
+  useGetAllJobsQuery, 
+  useAddJobMutation, 
+  useGetJobByIdQuery, 
+  useUpdateJobMutation, 
+  useDeleteJobMutation 
+} = jobApi;
