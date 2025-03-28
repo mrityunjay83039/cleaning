@@ -1,14 +1,12 @@
 import { ApiRouteService } from "../../config/app-reference";
 import { apiSlice } from "../interceptor/apiSlice";
 
-export interface Blog {
+export interface Job {
   id: string;
   title: string;
   slug: string;
   imageUrl: string;
-  categoryTitle: string;
-  categoryId: string;
-  blogDetail: string;
+  jobDetail: string;
   authorName: string;
   createdAt: string;
 }

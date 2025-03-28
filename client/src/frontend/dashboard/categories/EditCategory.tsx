@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Input } from "@mui/material";
+import { Button, Card, CardContent, CircularProgress, Input } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
@@ -7,11 +7,13 @@ import { useUpdateCategoryMutation, useGetCategoryByIdQuery } from "../../../red
 
 const EditCategory = () => {
   const { id } = useParams();
-  const { data, error, isLoading } = useGetCategoryByIdQuery(id);
+  const { data, error, isLoading, refetch } = useGetCategoryByIdQuery(id);
   console.log("Category data:", data);
   const navigate = useNavigate();
   const [imagePath, setImagePath] = useState("");
   const [updateCategory] = useUpdateCategoryMutation();
+  const [imageLoading, setImageLoading] = useState(false);
+  const [formSubmitting, setFormSubmitting] = useState(false);
 
   const methods = useForm({
     defaultValues: {
@@ -32,10 +34,10 @@ const EditCategory = () => {
   useEffect(() => {
     if (data?.category) {
       reset({
-        title: data?.category?.title || "",
-        imageUrl: data?.category?.imageUrl || "",
+        title: data.category.title || "",
+        imageUrl: data.category.imageUrl || "",
       });
-      setImagePath(data?.category?.imageUrl || "");
+      setImagePath(data.category.imageUrl || "");
     }
   }, [data, reset]);
   
@@ -45,6 +47,9 @@ const EditCategory = () => {
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
+
+    setImageLoading(true); // Start Loader
+
     const cloudName = import.meta.env.VITE_CLOUD_NAME;
     const uploadPreset = import.meta.env.VITE_UPLOAD_PRESET;
 
@@ -53,25 +58,45 @@ const EditCategory = () => {
     formData.append("upload_preset", uploadPreset);
     formData.append("cloud_name", cloudName);
 
-    const res = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-      {
+    try {
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
         method: "POST",
         body: formData,
-      }
-    );
-    const fileObj = await res.json();
-    setImagePath(fileObj.url);
-    setValue("imageUrl", fileObj.url);
+      });
+
+      const fileObj = await res.json();
+      console.log("Uploaded Image URL:", fileObj.secure_url);
+
+      setImagePath(fileObj.secure_url);
+      setValue("imageUrl", fileObj.secure_url);
+    } catch (error) {
+      console.error("Image upload failed", error);
+      toast.error("Image upload failed");
+    } finally {
+      setImageLoading(false); // Stop Loader
+    }
   };
 
   const onSubmitHandler = async (value) => {
+    setFormSubmitting(true); 
+
+    const updatedData = { 
+      ...value, 
+      imageUrl: imagePath || getValues("imageUrl"),
+    };
+
+    console.log("Submitting Updated Data:", updatedData); 
+
     try {
-      await updateCategory({ id, ...value }).unwrap();
+      await updateCategory({ id, updatedData });
+      await refetch();
       toast.success("Category updated successfully", { position: "top-center" });
-      navigate("/categories");
+      navigate(`/dashboard/edit-category/${id}`);
     } catch (error) {
       console.error("Update error: ", error);
+      toast.error("Failed to update category");
+    } finally {
+      setFormSubmitting(false); // Stop Loader
     }
   };
 
@@ -106,12 +131,15 @@ const EditCategory = () => {
               </div>
               <div className="col-md-12 custom-pad-20">
                 <div className="tp-contact-form-field mb-4">
-                  <input type="file" onChange={(e) => handleImageChange(e)} />
+                <input type="file" onChange={handleImageChange} disabled={imageLoading} />
+                {imageLoading && <CircularProgress size={20} style={{ marginLeft: "10px" }} />}
                 </div>
               </div>
               <div className="col-md-12 custom-pad-20">
                 <div className="tp-contact-form-field">
-                  <Button type="submit" variant="contained">Update</Button>
+                  <Button type="submit" variant="contained" disabled={formSubmitting}>
+                    {formSubmitting ? <CircularProgress size={24} /> : "Update"}
+                  </Button>
                 </div>
               </div>
             </div>

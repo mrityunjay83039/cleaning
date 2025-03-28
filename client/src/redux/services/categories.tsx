@@ -1,19 +1,14 @@
 import { ApiRouteService } from "../../config/app-reference";
 import { apiSlice } from "../interceptor/apiSlice";
 
-export interface Login {
-  userKey: string;
-  password: string;
-  key: string;
-}
-
 export const categoryApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAllCategories: builder.mutation({
+    getAllCategories: builder.query({
       query: () => ({
         url: ApiRouteService.category,
         method: "GET",
       }),
+      providesTags: ["Category"],
     }),
 
     addCategory: builder.mutation<any, any>({
@@ -22,6 +17,7 @@ export const categoryApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Category"],
     }),
 
     getCategoryById: builder.query({
@@ -29,6 +25,7 @@ export const categoryApi = apiSlice.injectEndpoints({
         url: `${ApiRouteService.category}/${id}`,
         method: "GET",
       }),
+      providesTags: ["Category"],
     }),
 
     // Update Category
@@ -38,6 +35,7 @@ export const categoryApi = apiSlice.injectEndpoints({
         method: "PUT",
         body: updatedData,
       }),
+      invalidatesTags: ["Category"],
     }),
 
     // Delete Category
@@ -46,12 +44,13 @@ export const categoryApi = apiSlice.injectEndpoints({
         url: `${ApiRouteService.category}/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Category"],
     }),
   }),
 });
 
 export const { 
-  useGetAllCategoriesMutation, 
+  useGetAllCategoriesQuery, 
   useGetCategoryByIdQuery, 
   useAddCategoryMutation, 
   useUpdateCategoryMutation, 

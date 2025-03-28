@@ -45,18 +45,8 @@ const DashboardSidebar: React.FC = () => {
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link collapsed" to="/dashboard/add-category">
-          <span>Add Category</span>
-        </Link>
-      </li>
-      <li className="nav-item">
         <Link className="nav-link collapsed" to="/dashboard/blogs">
           <span>Blogs</span>
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link className="nav-link collapsed" to="/dashboard/blog/add">
-          <span>Add New Blog</span>
         </Link>
       </li>
 

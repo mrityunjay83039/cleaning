@@ -30,6 +30,7 @@ import AddPosts from "../frontend/dashboard/blog/AddPosts";
 import Categories from "../frontend/dashboard/categories";
 import AddCategory from "../frontend/dashboard/categories/AddCategory";
 import EditCategory from "../frontend/dashboard/categories/EditCategory";
+import EditPost from "../frontend/dashboard/blog/EditPost";
 
 const frontendRoutes = createBrowserRouter([
   {
@@ -153,6 +154,10 @@ const frontendRoutes = createBrowserRouter([
       {
         path: "blog/add",
         element: <AddPosts/>
+      },
+      {
+        path: "edit-blog/:id",
+        element: <EditPost />
       }
     ],
   },

@@ -1,7 +1,7 @@
 export const ApiRouteService = {
   login: "user/login",
   logout: "user/logout",
-  addPost: "blog",
-  allBlogs: "blog/getallblogs",
-  category: "category"
+  category: "category",
+  blog: "blog",
+  job: "job",
 };
