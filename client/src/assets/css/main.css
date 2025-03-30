@@ -8105,3 +8105,16 @@ select {
 }
 
 /*# sourceMappingURL=main.css.map */
+
+/*# Custom CSS for the theme */
+.add-new-button {
+  background-color: #1976d2;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+/*# Custom CSS for the theme */

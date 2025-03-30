@@ -3,26 +3,14 @@ const router = express.Router();
 const Gallery = require("../model/Gallery");
 const mongoose = require("mongoose");
 const checkAuth = require("../middleware/checkAuth");
-const jwt = require("jsonwebtoken");
-
-const JWT_SECRET = process.env.JWT_SECRET || "zibrish 123";
-
-// Middleware to verify JWT
-const verifyToken = (req) => {
-  const token = req.headers.authorization?.split(" ")[1];
-  if (!token) throw new Error("Unauthorized: No token provided");
-  return jwt.verify(token, JWT_SECRET);
-};
 
 // Add Gallery
 router.post("/", checkAuth, async (req, res) => {
   try {
-    const verify = verifyToken(req);
     const newGallery = new Gallery({
-      _id: new mongoose.Types.ObjectId(),
       title: req.body.title,
       imageUrl: req.body.imageUrl,
-      userId: verify.userId,
+      userId: req.user.userId,
     });
 
     const result = await newGallery.save();
@@ -36,13 +24,31 @@ router.post("/", checkAuth, async (req, res) => {
 // Get All Gallery
 router.get("/", checkAuth, async (req, res) => {
   try {
-    const verify = verifyToken(req);
-    const galleries = await Gallery.find({ userId: verify.userId }).select(
+    const galleries = await Gallery.find({ userId: req.user.userId }).select(
       "_id title imageUrl userId"
     );
-    res.status(200).json({ success: true, galleryList: galleries });
+    res.status(200).json({ success: true, galleries });
   } catch (err) {
     console.error(err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// ✅ Get Gallery by ID
+router.get("/:id", checkAuth, async (req, res) => {
+  try {
+    const gallery = await Gallery.findById(req.params.id)
+      .populate("userId", "firstName lastName")
+      .select("_id userId title imageUrl authorName");
+
+    if (!gallery) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Gallery not found" });
+    }
+
+    res.status(200).json({ success: true, gallery });
+  } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
 });
@@ -50,9 +56,8 @@ router.get("/", checkAuth, async (req, res) => {
 // Update Gallery
 router.put("/:id", checkAuth, async (req, res) => {
   try {
-    const verify = verifyToken(req);
     const updatedGallery = await Gallery.findOneAndUpdate(
-      { _id: req.params.id, userId: verify.userId },
+      { _id: req.params.id, userId: req.user.userId },
       {
         $set: {
           title: req.body.title,
@@ -77,10 +82,9 @@ router.put("/:id", checkAuth, async (req, res) => {
 // Delete Gallery
 router.delete("/:id", checkAuth, async (req, res) => {
   try {
-    const verify = verifyToken(req);
     const result = await Gallery.deleteOne({
       _id: req.params.id,
-      userId: verify.userId,
+      userId: req.user.userId,
     });
 
     if (result.deletedCount === 0) {

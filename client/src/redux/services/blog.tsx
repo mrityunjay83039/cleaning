@@ -1,29 +1,92 @@
 import { ApiRouteService } from "../../config/app-reference";
 import { apiSlice } from "../interceptor/apiSlice";
 
-export interface Login {
-  userKey: string;
-  password: string;
-  key: string;
+export interface Blog {
+  id: string;
+  title: string;
+  slug: string;
+  imageUrl: string;
+  categoryTitle: string;
+  categoryId: string;
+  blogDetail: string;
+  authorName: string;
+  createdAt: string;
+}
+
+export interface AddPostRequest {
+  title: string;
+  imageUrl: string;
+  categoryTitle: string;
+  categoryId: string;
+  blogDetail: string;
+  authorName: string;
+}
+
+export interface UpdatePostRequest {
+  title: string;
+  imageUrl: string;
+  categoryTitle: string;
+  categoryId: string;
+  blogDetail: string;
+  authorName: string;
 }
 
 export const blogApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAllBlogs: builder.mutation<Login, Partial<Login>>({
+    getAllBlogs: builder.query<Blog[], void>({
       query: () => ({
-        url: ApiRouteService.allBlogs,
+        url: ApiRouteService.blog,
         method: "GET",
       }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.blogs.map(({ id }) => ({ type: "Blog", id } as const)),
+              { type: "Blog", id: "LIST" },
+            ]
+          : [{ type: "Blog", id: "LIST" }],
     }),
-
-    addPost: builder.mutation<any, any>({
+    
+    getBlogById: builder.query<Blog, string>({
+      query: (id) => ({
+        url: `${ApiRouteService.blog}/${id}`,
+        method: "GET",
+      }),
+      providesTags: (result, error, id) => [{ type: "Blog", id }],
+    }),
+    
+    addPost: builder.mutation<Blog, AddPostRequest>({
       query: (data) => ({
-        url: ApiRouteService.addPost,
+        url: ApiRouteService.blog,
         method: "POST",
         body: data,
       }),
+      invalidatesTags: [{ type: "Blog", id: "LIST" }],
+    }),
+    
+    updatePost: builder.mutation<Blog, UpdatePostRequest>({
+      query: ({ id, updatedData }) => ({
+        url: `${ApiRouteService.blog}/${id}`,
+        method: "PUT",
+        body: updatedData,
+      }),
+      invalidatesTags: (result, error, { id }) => [{ type: "Blog", id }, { type: "Blog", id: "LIST" }],
+    }),
+    
+    deletePost: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `${ApiRouteService.blog}/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result, error, id) => [{ type: "Blog", id }, { type: "Blog", id: "LIST" }],
     }),
   }),
 });
 
-export const { useGetAllBlogsMutation, useAddPostMutation } = blogApi;
+export const { 
+  useGetAllBlogsQuery, 
+  useAddPostMutation, 
+  useGetBlogByIdQuery,
+  useUpdatePostMutation, 
+  useDeletePostMutation 
+} = blogApi;

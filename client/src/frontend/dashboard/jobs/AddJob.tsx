@@ -12,36 +12,28 @@ import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
-import { useAddPostMutation } from "../../../redux/services/blog";
-import { useGetAllCategoriesQuery } from "../../../redux/services/categories";
+import { useAddJobMutation } from "../../../redux/services/job";
 
-interface PostFormData {
+interface JobFormData {
   title: string;
   imageUrl: string;
-  categoryTitle: string;
-  categoryId: string;
-  blogDetail: string;
+  jobDetail: string;
   authorName: string;
 }
 
-const AddPosts = () => {
+const AddJob = () => {
   const navigate = useNavigate();
   const [content, setContent] = useState("");
   const [imagePath, setImagePath] = useState("");
   const [isUploading, setIsUploading] = useState(false);
 
-  const { data: categories, isLoading } = useGetAllCategoriesQuery();
-  const categoryList = categories?.categoryList || [];
+  const [addJob] = useAddJobMutation();
 
-  const [addPost] = useAddPostMutation();
-
-  const methods = useForm<PostFormData>({
+  const methods = useForm<JobFormData>({
     defaultValues: {
       title: "",
       imageUrl: "",
-      categoryTitle: "",
-      categoryId: "",
-      blogDetail: "",
+      jobDetail: "",
       authorName: "",
     },
   });
@@ -55,7 +47,7 @@ const AddPosts = () => {
 
   const handleEditorChange = (newContent: string) => {
     setContent(newContent);
-    setValue("blogDetail", newContent);
+    setValue("jobDetail", newContent);
   };
 
   const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,24 +84,24 @@ const AddPosts = () => {
     }
   };
 
-  const onSubmitHandler = async (values: PostFormData) => {
+  const onSubmitHandler = async (values: JobFormData) => {
     try {
-      const res = await addPost(values);
+      const res = await addJob(values);
 
       if (res && res.data) {
-        toast.success("Post added successfully");
-        navigate("/dashboard/blogs");
+        toast.success("Job added successfully");
+        navigate("/dashboard/jobs");
       }
     } catch (error) {
-      console.error("Add post error:", error);
-      toast.error("Failed to add post. Please try again.");
+      console.error("Add job error:", error);
+      toast.error("Failed to add job. Please try again.");
     }
   };
 
   return (
     <Card className="max-w-lg mx-auto p-6 shadow-md rounded-2xl">
       <CardContent>
-        <h2 className="text-xl font-bold mb-4">Add New Blog Post</h2>
+        <h2 className="text-xl font-bold mb-4">Add New Job</h2>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmitHandler)}>
             {/* Title Field */}
@@ -118,51 +110,17 @@ const AddPosts = () => {
               control={control}
               rules={{ required: "Title is required" }}
               render={({ field }) => (
-                <TextField {...field} label="Blog Title" fullWidth margin="normal" error={!!errors.title} helperText={errors.title?.message} />
+                <TextField {...field} label="Job Title" fullWidth margin="normal" error={!!errors.title} helperText={errors.title?.message} />
               )}
             />
 
             {/* Image Upload */}
-            <div>
+            <div className="mb-4">
               <input type="file" onChange={handleImageChange} className="w-full p-2 border mt-4" />
             </div>
-            {isUploading ? <CircularProgress size={24} className="mt-4" /> : imagePath && <img src={imagePath} alt="Uploaded" className="w-full mt-2" />}
+            {isUploading ? <CircularProgress size={24} className="mt-4" /> : imagePath && <img src={imagePath} alt="Uploaded" className="w-full mt-2 mb-2" />}
 
-            {/* Category Selection */}
-            <Controller
-              name="categoryId"
-              control={control}
-              rules={{ required: "Category is required" }}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  fullWidth
-                  onChange={(event) => {
-                    const selectedCategory = categoryList.find(cat => cat._id === event.target.value);
-                    field.onChange(selectedCategory?._id || "");
-                    setValue("categoryTitle", selectedCategory?.title || "");
-                  }}
-                  displayEmpty
-                  className="mt-4 mb-4"
-                >
-                  <MenuItem value="" disabled>Select a Category</MenuItem>
-                  {isLoading ? (
-                    <MenuItem disabled>Loading...</MenuItem>
-                  ) : categoryList.length > 0 ? (
-                    categoryList.map((category) => (
-                    <MenuItem key={category._id} value={category._id}>
-                      {category.title}
-                    </MenuItem>
-                    ))
-                  ) : (
-                    <MenuItem disabled>No categories available</MenuItem>
-                  )}
-                </Select>
-              )}
-            />
-            {errors.categoryId && <div className="text-red-500 mt-1">{errors.categoryId.message}</div>}
-
-            {/* Blog Content Editor */}
+            {/* Job Detail Editor */}
             <Editor
               apiKey="6rq58torrow1webfnxy8wn0e6zqtzjoemmprd735oh84809n"
               initialValue="<p>Start typing here...</p>"
@@ -189,4 +147,4 @@ const AddPosts = () => {
   );
 };
 
-export default AddPosts;
+export default AddJob;

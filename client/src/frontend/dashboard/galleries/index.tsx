@@ -1,31 +1,33 @@
 import React, { useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import {useDeletePostMutation, useGetAllBlogsQuery } from "../../../redux/services/blog";
 import {
   MaterialReactTable,
   MRT_ColumnDef,
   useMaterialReactTable,
 } from "material-react-table";
 import { MenuItem } from "@mui/material";
+import { useDeleteGalleryMutation, useGetAllGalleriesQuery } from "../../../redux/services/gallery";
 
-const Blog: React.FC = () => {
+const Gallery: React.FC = () => {
   const navigate = useNavigate();
 
-  const { data: blogData, isLoading, isError, refetch } = useGetAllBlogsQuery();
+  const { data: GalleryData, isLoading, isError, refetch } = useGetAllGalleriesQuery();
 
-  const [deleteBlog] = useDeletePostMutation();
+  console.log("galleryData: ", GalleryData);
+  
+  const [deleteGallery] = useDeleteGalleryMutation();
 
   const handleDeleteClick = useCallback(async (id: string) => {
     try {
-      const res = await deleteBlog(id);
+      const res = await deleteGallery(id);
       await refetch();
     } catch (error) {
       console.error("Delete blog error:", error);
     }
-  }, [deleteBlog]);
+  }, [deleteGallery]);
 
   const handleDeleteConfirmation = (id: string) => {
-    if (window.confirm("Are you sure you want to delete this blog post?")) {
+    if (window.confirm("Are you sure you want to delete this job?")) {
       handleDeleteClick(id);
     }
   };
@@ -38,11 +40,6 @@ const Blog: React.FC = () => {
         size: 150,
       },
       {
-        accessorKey: "categoryTitle",
-        header: "Category",
-        size: 150,
-      },
-      {
         accessorKey: "imageUrl",
         header: "Image",
         size: 150,
@@ -51,7 +48,7 @@ const Blog: React.FC = () => {
           return imageUrl ? (
             <img
               src={imageUrl}
-              alt="Category"
+              alt="Job"
               style={{ width: 100, height: 100, objectFit: "cover", borderRadius: "5px" }}
             />
           ) : (
@@ -65,19 +62,19 @@ const Blog: React.FC = () => {
 
   const table = useMaterialReactTable({
     columns,
-    data: blogData?.blogs || [],
+    data: GalleryData?.galleries || [],
     enableRowActions: true,
     positionActionsColumn: "last",
     renderTopToolbarCustomActions: () => (
       <button
-        onClick={() => navigate("/dashboard/blog/add")}
+        onClick={() => navigate("/dashboard/gallery/add")}
         className="add-new-button"
       >
-        + Add New Post
+        + Add New Gallery
       </button>
     ),
     renderRowActionMenuItems: ({ row }) => [
-      <MenuItem key="edit" onClick={() => navigate(`/dashboard/edit-blog/${row.original._id}`)}>
+      <MenuItem key="edit" onClick={() => navigate(`/dashboard/edit-gallery/${row.original._id}`)}>
         Edit
       </MenuItem>,
       <MenuItem key="delete" onClick={() => handleDeleteConfirmation(row.original._id)}>
@@ -89,4 +86,4 @@ const Blog: React.FC = () => {
   return <MaterialReactTable table={table} />;
 };
 
-export default Blog;
+export default Gallery;

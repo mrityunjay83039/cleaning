@@ -28,6 +28,15 @@ import DashboardLayout from "../frontend/dashboard/DashboardLayout";
 import Blog from "../frontend/dashboard/blog";
 import AddPosts from "../frontend/dashboard/blog/AddPosts";
 import Categories from "../frontend/dashboard/categories";
+import AddCategory from "../frontend/dashboard/categories/AddCategory";
+import EditCategory from "../frontend/dashboard/categories/EditCategory";
+import EditPost from "../frontend/dashboard/blog/EditPost";
+import Job from "../frontend/dashboard/jobs";
+import AddJob from "../frontend/dashboard/jobs/AddJob";
+import EditJob from "../frontend/dashboard/jobs/EditJob";
+import Gallery from "../frontend/dashboard/galleries";
+import AddGallery from "../frontend/dashboard/galleries/AddGallery";
+import EditGallery from "../frontend/dashboard/galleries/EditGallery";
 
 const frontendRoutes = createBrowserRouter([
   {
@@ -137,17 +146,47 @@ const frontendRoutes = createBrowserRouter([
       },
       {
         path: "add-category",
-        element: <Blog />,
-
+        element: <AddCategory />
+      },
+      {
+        path: "edit-category/:id",
+        element: <EditCategory />
       },
       {
         path: "blogs",
         element: <Blog />,
-
       },
       {
         path: "blog/add",
         element: <AddPosts/>
+      },
+      {
+        path: "edit-blog/:id",
+        element: <EditPost />
+      },
+      {
+        path: "jobs",
+        element: <Job />
+      },
+      {
+        path: "job/add",
+        element: <AddJob />
+      },
+      {
+        path: "edit-job/:id",
+        element: <EditJob />
+      },
+      {
+        path: "galleries",
+        element: <Gallery />
+      },
+      {
+        path: "gallery/add",
+        element: <AddGallery />
+      },
+      {
+        path: "edit-gallery/:id",
+        element: <EditGallery />
       }
     ],
   },

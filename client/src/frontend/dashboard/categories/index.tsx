@@ -1,61 +1,97 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   MaterialReactTable,
   MRT_ColumnDef,
   useMaterialReactTable,
 } from "material-react-table";
 import { MenuItem } from "@mui/material";
-import { useGetAllCategoriesMutation } from "../../../redux/services/categories";
+import { useDeleteCategoryMutation, useGetAllCategoriesQuery } from "../../../redux/services/categories";
 
 const Categories: React.FC = () => {
-  const [allCategories, setAllCategories] = useState([]);
+  const navigate = useNavigate();
+  const { data: categoriesData, isLoading, isError } = useGetAllCategoriesQuery();
+  const [deleteCategory] = useDeleteCategoryMutation();
 
-  const [categories] = useGetAllCategoriesMutation();
-
-  const getAllCategories = async () => {
+  const handleDeleteClick = useCallback(async (id: string) => {
     try {
-      const response = await categories({});
-      console.log("categories: ", response?.data?.categoryList);
-      if (response) {
-        setAllCategories(response?.data?.categoryList);
-      }
+      await deleteCategory(id).unwrap();
     } catch (error) {
-      console.log("Get categories error: ", error);
+      console.error("Delete category error: ", error);
+    }
+  }, [deleteCategory]);
+
+  const handleDeleteConfirmation = (id: string) => {
+    if (window.confirm("Are you sure you want to delete this category?")) {
+      handleDeleteClick(id);
     }
   };
 
-  useEffect(() => {
-    getAllCategories();
-  }, []);
+  const columns = useMemo(() => [
+    {
+      accessorKey: "title",
+      header: "Category",
+      size: 150,
+    },
+    {
+      accessorKey: "imageUrl",
+      header: "Image",
+      size: 150,
+      Cell: ({ cell }) => {
+        const imageUrl = cell.getValue();
+        return imageUrl ? (
+          <img
+            src={imageUrl}
+            alt="Category"
+            style={{
+              width: 100,
+              height: 100,
+              objectFit: "cover",
+              borderRadius: "5px",
+            }}
+          />
+        ) : (
+          <span style={{ color: "gray", fontStyle: "italic" }}>
+            No Image Available
+          </span>
+        );
+      },
+    },
+  ], []);
 
-
-  const columns = useMemo(
-    () => [
-      {
-        accessorKey: 'title', 
-        header: 'Category',
-        size: 150,
-      }
-    ],
-    [],
-  );
-  
+  // Ensure useMaterialReactTable is called unconditionally
   const table = useMaterialReactTable({
     columns,
-    data:allCategories, 
-    enableRowActions:true,
-    positionActionsColumn: 'last',
+    data: categoriesData?.categoryList || [],
+    enableRowActions: true,
+    positionActionsColumn: "last",
+    renderTopToolbarCustomActions: () => (
+      <button
+        onClick={() => navigate("/dashboard/add-category")}
+        className="add-new-button"
+      >
+        + Add New Category
+      </button>
+    ),
     renderRowActionMenuItems: ({ row }) => [
-      <MenuItem key="edit" onClick={() => console.info('Edit')}>
+      <MenuItem
+        key="edit"
+        onClick={() => navigate(`/dashboard/edit-category/${row.original._id}`)}
+      >
         Edit
       </MenuItem>,
-      <MenuItem key="delete" onClick={() => console.info('Delete')}>
+      <MenuItem key="delete" onClick={() => handleDeleteConfirmation(row.original._id)}>
         Delete
       </MenuItem>,
     ],
   });
 
+  // Return loading/error AFTER hooks are defined
+  if (isLoading) return <p>Loading categories...</p>;
+  if (isError) return <p>Error fetching categories.</p>;
+
   return <MaterialReactTable table={table} />;
 };
 
 export default Categories;
+

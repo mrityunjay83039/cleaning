@@ -1,31 +1,33 @@
 import React, { useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import {useDeletePostMutation, useGetAllBlogsQuery } from "../../../redux/services/blog";
 import {
   MaterialReactTable,
   MRT_ColumnDef,
   useMaterialReactTable,
 } from "material-react-table";
 import { MenuItem } from "@mui/material";
+import { useDeleteJobMutation, useGetAllJobsQuery } from "../../../redux/services/job";
 
-const Blog: React.FC = () => {
+const Job: React.FC = () => {
   const navigate = useNavigate();
 
-  const { data: blogData, isLoading, isError, refetch } = useGetAllBlogsQuery();
+  const { data: JobData, isLoading, isError, refetch } = useGetAllJobsQuery();
 
-  const [deleteBlog] = useDeletePostMutation();
+  console.log("JobData: ", JobData);
+  
+  const [deleteJob] = useDeleteJobMutation();
 
   const handleDeleteClick = useCallback(async (id: string) => {
     try {
-      const res = await deleteBlog(id);
+      const res = await deleteJob(id);
       await refetch();
     } catch (error) {
       console.error("Delete blog error:", error);
     }
-  }, [deleteBlog]);
+  }, [deleteJob]);
 
   const handleDeleteConfirmation = (id: string) => {
-    if (window.confirm("Are you sure you want to delete this blog post?")) {
+    if (window.confirm("Are you sure you want to delete this job?")) {
       handleDeleteClick(id);
     }
   };
@@ -38,11 +40,6 @@ const Blog: React.FC = () => {
         size: 150,
       },
       {
-        accessorKey: "categoryTitle",
-        header: "Category",
-        size: 150,
-      },
-      {
         accessorKey: "imageUrl",
         header: "Image",
         size: 150,
@@ -51,7 +48,7 @@ const Blog: React.FC = () => {
           return imageUrl ? (
             <img
               src={imageUrl}
-              alt="Category"
+              alt="Job"
               style={{ width: 100, height: 100, objectFit: "cover", borderRadius: "5px" }}
             />
           ) : (
@@ -65,19 +62,19 @@ const Blog: React.FC = () => {
 
   const table = useMaterialReactTable({
     columns,
-    data: blogData?.blogs || [],
+    data: JobData?.jobs || [],
     enableRowActions: true,
     positionActionsColumn: "last",
     renderTopToolbarCustomActions: () => (
       <button
-        onClick={() => navigate("/dashboard/blog/add")}
+        onClick={() => navigate("/dashboard/job/add")}
         className="add-new-button"
       >
-        + Add New Post
+        + Add New Job
       </button>
     ),
     renderRowActionMenuItems: ({ row }) => [
-      <MenuItem key="edit" onClick={() => navigate(`/dashboard/edit-blog/${row.original._id}`)}>
+      <MenuItem key="edit" onClick={() => navigate(`/dashboard/edit-job/${row.original._id}`)}>
         Edit
       </MenuItem>,
       <MenuItem key="delete" onClick={() => handleDeleteConfirmation(row.original._id)}>
@@ -89,4 +86,4 @@ const Blog: React.FC = () => {
   return <MaterialReactTable table={table} />;
 };
 
-export default Blog;
+export default Job;
