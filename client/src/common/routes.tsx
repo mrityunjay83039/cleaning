@@ -37,6 +37,7 @@ import EditJob from "../frontend/dashboard/jobs/EditJob";
 import Gallery from "../frontend/dashboard/galleries";
 import AddGallery from "../frontend/dashboard/galleries/AddGallery";
 import EditGallery from "../frontend/dashboard/galleries/EditGallery";
+import ImageGallery from "../frontend/gallery";
 
 const frontendRoutes = createBrowserRouter([
   {
@@ -116,6 +117,10 @@ const frontendRoutes = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/gallery",
+        element: <ImageGallery />,
       },
       {
         path: "/adminlogin",

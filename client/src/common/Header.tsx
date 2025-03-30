@@ -85,6 +85,9 @@ const Header = () => {
                           </li>
                         </ul> */}
                       </li>
+                      <li className="menu-item-has-children">
+                        <Link to="/gallery">Gallery</Link>
+                      </li>
                       <li>
                         <Link to="/contact-us">Contact</Link>
                       </li>
