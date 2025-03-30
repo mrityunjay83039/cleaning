@@ -34,7 +34,7 @@ router.post("/", checkAuth, async (req, res) => {
 });
 
 // Get All Categories
-router.get("/", checkAuth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const verify = verifyToken(req);
     const categories = await Category.find({ userId: verify.userId }).select(
@@ -48,7 +48,7 @@ router.get("/", checkAuth, async (req, res) => {
 });
 
 // Get Category by ID
-router.get("/:id", checkAuth, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const verify = verifyToken(req);
     const categoryId = req.params.id;
