@@ -38,6 +38,7 @@ import Gallery from "../frontend/dashboard/galleries";
 import AddGallery from "../frontend/dashboard/galleries/AddGallery";
 import EditGallery from "../frontend/dashboard/galleries/EditGallery";
 import ImageGallery from "../frontend/gallery";
+import BlogDetails from "../frontend/blogs/BlogDetails";
 
 const frontendRoutes = createBrowserRouter([
   {
@@ -117,6 +118,10 @@ const frontendRoutes = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/blogs/:slug",
+        element: <BlogDetails />,
       },
       {
         path: "/gallery",

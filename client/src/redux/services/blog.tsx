@@ -54,6 +54,14 @@ export const blogApi = apiSlice.injectEndpoints({
       }),
       providesTags: (result, error, id) => [{ type: "Blog", id }],
     }),
+
+    getBlogBySlug: builder.query<Blog, string>({
+      query: (slug) => ({
+        url: `${ApiRouteService.blogBySlug}/${slug}`,
+        method: "GET",
+      }),
+      providesTags: (result, error, slug) => [{ type: "Blog", slug }],
+    }),
     
     addPost: builder.mutation<Blog, AddPostRequest>({
       query: (data) => ({
@@ -87,6 +95,7 @@ export const {
   useGetAllBlogsQuery, 
   useAddPostMutation, 
   useGetBlogByIdQuery,
+  useGetBlogBySlugQuery,
   useUpdatePostMutation, 
   useDeletePostMutation 
 } = blogApi;
