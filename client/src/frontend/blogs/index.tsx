@@ -1,14 +1,11 @@
 import { Link } from "react-router-dom";
 import { useGetAllBlogsQuery } from "../../redux/services/blog";
-import { baseConfig } from "../../config/base-config";
 import { useGetAllCategoriesQuery } from "../../redux/services/categories";
 import BreadCrumb from "../../common/BreadCrumb";
+import BlogSideBar from "./BlogSideBar";
 
 const Blogs = () => {
   const { data: blogData} = useGetAllBlogsQuery();
-  const {data: categoriesData } = useGetAllCategoriesQuery();
-  console.log("blog: ", blogData);
-  console.log("categories: ", categoriesData);
   return (
     <>
     <BreadCrumb breadCrumTitle="Blog Posts" pageName="Blog" />
@@ -16,7 +13,7 @@ const Blogs = () => {
       <div className="container">
         <div className="tp-custom-container-box">
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-9">
               <div className="ablog__sidebar--wrapper mr-50">
                 {blogData &&
                   blogData?.blogs.length > 0 &&
@@ -57,17 +54,17 @@ const Blogs = () => {
                             </ul>
                           </div> */}
                           <h3 className="ablog__text--title4 mb-20">
-                            <Link to={`${baseConfig.baseUrl}/blogs/${el.slug}`}>
+                            <Link to={`./${el.slug}`}>
                               {el.title}
                             </Link>
                           </h3>
                           <div
-                            dangerouslySetInnerHTML={{ __html: el.blogDetail }}
+                            dangerouslySetInnerHTML={{ __html: el.blogDetail.slice(0, 200) + "..." }}
                           />
 
                           <div className="ablog__btn4">
                             <Link
-                              to={`${baseConfig.baseUrl}/blogs/${el.slug}`}
+                              to={`./${el.slug}`}
                               className="theme-btn"
                             >
                               <i className="flaticon-enter"></i> Read More
@@ -79,109 +76,8 @@ const Blogs = () => {
                   })}
               </div>
             </div>
-            <div className="col-lg-4">
-              <div className="ablog__sidebar">
-                <div className="widget wow fadeInUp" data-wow-delay=".3s">
-                  {/* <div className="sidebar--widget__search mb-45">
-                    <form action="#">
-                      <input type="text" placeholder="Search" />
-                      <button type="submit">
-                        <i className="far fa-search"></i>
-                      </button>
-                    </form>
-                  </div>  */}
-                </div>
-                <div className="widget mb-45 wow fadeInUp" data-wow-delay=".5s">
-                  {/* <h3 className="sidebar__widget--title mb-30">Recent News </h3>
-                  <div className="sidebar--widget__post mb-20">
-                    <div className="sidebar__post--thumb">
-                      <a href="blog-details.html">
-                        <div
-                          className="post__img"
-                          data-background="assets/img/blog/b1.jpg"
-                        ></div>
-                      </a>
-                    </div>
-                    <div className="sidebar__post--text">
-                      <h4 className="sidebar__post--title">
-                        <a href="blog-details.html">
-                          Businesses Are Thriving <br />
-                          Societies Are Not.
-                        </a>
-                      </h4>
-                      <span>January 15, 2021</span>
-                    </div>
-                  </div> */}
-                  {/* <div className="sidebar--widget__post mb-20">
-                    <div className="sidebar__post--thumb">
-                      <a href="blog-details.html">
-                        <div
-                          className="post__img"
-                          data-background="assets/img/blog/b2.jpg"
-                        ></div>
-                      </a>
-                    </div>
-                    <div className="sidebar__post--text">
-                      <h4 className="sidebar__post--title">
-                        <a href="blog-details.html">
-                          The Importance of Instagram <br />
-                          Metrics and
-                        </a>
-                      </h4>
-                      <span>January 15, 2021</span>
-                    </div>
-                  </div>
-                  <div className="sidebar--widget__post mb-20">
-                    <div className="sidebar__post--thumb">
-                      <a href="blog-details.html">
-                        <div
-                          className="post__img"
-                          data-background="assets/img/blog/b7.jpg"
-                        ></div>
-                      </a>
-                    </div>
-                    <div className="sidebar__post--text">
-                      <h4 className="sidebar__post--title">
-                        <a href="blog-details.html">
-                          TikTok Influencer Marketing <br />
-                          How to Work
-                        </a>
-                      </h4>
-                      <span>January 15, 2021</span>
-                    </div>
-                  </div> */}
-                </div>
-
-                <div className="widget mb-40 wow fadeInUp" data-wow-delay=".7s">
-                  <h3 className="sidebar__widget--title mb-25">Categories</h3>
-                  <div className="sidebar--widget__cat mb-20">
-                    <ul>
-                      {categoriesData &&
-                        categoriesData?.categoryList?.length > 0 &&
-                        categoriesData?.categoryList?.map((el) => {
-                          return (
-                            <li key={el._id}>
-                              <Link to="blog-details.html">{el.title}</Link>
-                            </li>
-                          );
-                        })}
-                    </ul>
-                  </div>
-                </div>
-                {/* <div className="widget mb-25 wow fadeInUp" data-wow-delay=".9s">
-                  <h3 className="sidebar__widget--title mb-30">Tags</h3>
-                  <div className="sidebar--widget__tag mb-20">
-                    <a href="blog-details.html">Animation</a>
-                    <a href="blog-details.html">Branding</a>
-                    <a href="blog-details.html">Design</a>
-                    <a href="blog-details.html">Ideas</a>
-                    <a href="blog-details.html">Landing</a>
-                    <a href="blog-details.html">Pix Saas Blog</a>
-                    <a href="blog-details.html">The Saas</a>
-                    <a href="blog-details.html">UI/UX</a>
-                  </div>
-                </div> */}
-              </div>
+            <div className="col-lg-3">
+              <BlogSideBar/>
             </div>
           </div>
           <div className="row">
