@@ -34,12 +34,10 @@ router.post("/", checkAuth, async (req, res) => {
     const slug = generateSlug(title);
     const existingBlog = await Blog.findOne({ slug });
     if (existingBlog) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Blog with the same title already exists",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Blog with the same title already exists",
+      });
     }
 
     // Create new blog
@@ -80,7 +78,15 @@ router.get("/", async (req, res) => {
 // ✅ Get Blog by ID
 router.get("/:id", checkAuth, async (req, res) => {
   try {
-    const blog = await Blog.findById(req.params.id)
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid blog ID" });
+    }
+
+    const blog = await Blog.findById(id)
       .populate("userId", "firstName lastName")
       .select(
         "_id userId title slug imageUrl categoryTitle categoryId blogDetail authorName"
@@ -94,7 +100,32 @@ router.get("/:id", checkAuth, async (req, res) => {
 
     res.status(200).json({ success: true, blog });
   } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+    console.error("Error fetching blog:", err);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+});
+
+// ✅ Get Blog by Slug
+router.get("/slug/:slug", async (req, res) => {
+  try {
+    const { slug } = req.params;
+
+    const blog = await Blog.findOne({ slug })
+      .populate("userId", "firstName lastName")
+      .select(
+        "_id userId title slug imageUrl categoryTitle categoryId blogDetail authorName"
+      );
+
+    if (!blog) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Blog not found" });
+    }
+
+    res.status(200).json({ success: true, blog });
+  } catch (err) {
+    console.error("Error fetching blog by slug:", err);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 });
 
