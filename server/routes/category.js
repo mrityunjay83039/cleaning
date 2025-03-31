@@ -36,13 +36,34 @@ router.post("/", checkAuth, async (req, res) => {
 // Get All Categories
 router.get("/", async (req, res) => {
   try {
-    const verify = verifyToken(req);
+    // Verify token and ensure user is authenticated
+    const verify = await verifyToken(req);
+    if (!verify || !verify.userId) {
+      return res
+        .status(401)
+        .json({ success: false, error: "Unauthorized access" });
+    }
+
+    // Fetch categories belonging to the user
     const categories = await Category.find({ userId: verify.userId }).select(
       "_id userId title imageUrl"
     );
+
     res.status(200).json({ success: true, categoryList: categories });
   } catch (err) {
-    console.error(err);
+    console.error("Error fetching categories:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Get All Categories (Public API)
+router.get("/public", async (req, res) => {
+  try {
+    const categories = await Category.find().select("_id title imageUrl");
+
+    res.status(200).json({ success: true, categoryList: categories });
+  } catch (err) {
+    console.error("Error fetching public categories:", err);
     res.status(500).json({ success: false, error: err.message });
   }
 });

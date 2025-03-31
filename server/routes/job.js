@@ -26,7 +26,20 @@ router.post("/", checkAuth, async (req, res) => {
 router.get("/", checkAuth, async (req, res) => {
   try {
     const jobs = await Job.find({ userId: req.user.userId }).select(
-      "_id title imageUrl jobDetail userId"
+      "_id title imageUrl jobDetail userId createdAt updatedAt"
+    );
+    res.status(200).json({ success: true, jobs });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Get All Jobs for Public user
+router.get("/public", async (req, res) => {
+  try {
+    const jobs = await Job.find().select(
+      "_id title imageUrl jobDetail createdAt updatedAt"
     );
     res.status(200).json({ success: true, jobs });
   } catch (err) {
@@ -40,7 +53,9 @@ router.get("/:id", checkAuth, async (req, res) => {
   try {
     const job = await Job.findById(req.params.id)
       .populate("userId", "firstName lastName")
-      .select("_id userId title imageUrl jobDetail authorName");
+      .select(
+        "_id userId title imageUrl jobDetail authorName createdAt updatedAt"
+      );
 
     if (!job) {
       return res.status(404).json({ success: false, message: "Job not found" });
