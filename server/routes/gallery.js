@@ -25,7 +25,20 @@ router.post("/", checkAuth, async (req, res) => {
 router.get("/", checkAuth, async (req, res) => {
   try {
     const galleries = await Gallery.find({ userId: req.user.userId }).select(
-      "_id title imageUrl userId"
+      "_id title imageUrl userId createdAt updatedAt"
+    );
+    res.status(200).json({ success: true, galleries });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Get All Gallery
+router.get("/public", async (req, res) => {
+  try {
+    const galleries = await Gallery.find().select(
+      "_id title imageUrl createdAt updatedAt"
     );
     res.status(200).json({ success: true, galleries });
   } catch (err) {
@@ -39,7 +52,7 @@ router.get("/:id", checkAuth, async (req, res) => {
   try {
     const gallery = await Gallery.findById(req.params.id)
       .populate("userId", "firstName lastName")
-      .select("_id userId title imageUrl authorName");
+      .select("_id userId title imageUrl authorName createdAt updatedAt");
 
     if (!gallery) {
       return res

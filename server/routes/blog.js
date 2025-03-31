@@ -66,7 +66,7 @@ router.get("/", async (req, res) => {
     const blogs = await Blog.find()
       .populate("userId", "firstName lastName")
       .select(
-        "_id userId title slug imageUrl categoryTitle categoryId blogDetail authorName"
+        "_id userId title slug imageUrl categoryTitle categoryId blogDetail authorName createdAt updatedAt"
       );
 
     res.status(200).json({ success: true, blogs });
@@ -89,7 +89,7 @@ router.get("/:id", checkAuth, async (req, res) => {
     const blog = await Blog.findById(id)
       .populate("userId", "firstName lastName")
       .select(
-        "_id userId title slug imageUrl categoryTitle categoryId blogDetail authorName"
+        "_id userId title slug imageUrl categoryTitle categoryId blogDetail authorName createdAt updatedAt"
       );
 
     if (!blog) {
@@ -113,7 +113,7 @@ router.get("/slug/:slug", async (req, res) => {
     const blog = await Blog.findOne({ slug })
       .populate("userId", "firstName lastName")
       .select(
-        "_id userId title slug imageUrl categoryTitle categoryId blogDetail authorName"
+        "_id userId title slug imageUrl categoryTitle categoryId blogDetail authorName createdAt updatedAt"
       );
 
     if (!blog) {
@@ -151,7 +151,7 @@ router.get("/myblogs", checkAuth, async (req, res) => {
   try {
     const { userId } = req.user;
     const blogList = await Blog.find({ userId }).select(
-      "_id title slug imageUrl categoryTitle categoryId blogDetail authorName"
+      "_id title slug imageUrl categoryTitle categoryId blogDetail authorName createdAt updatedAt"
     );
 
     res.status(200).json({ success: true, blogList });
