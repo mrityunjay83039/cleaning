@@ -103,11 +103,11 @@ const Header = () => {
               </div>
               <div className="col-xxl-4 col-xl-3 d-none d-xl-block">
                 <div className="tp-header-right-three">
-                  <div className="tp-header-number-three">
+                  {/* <div className="tp-header-number-three">
                     <span>
                       Call Us : <a href="tel:33888200-55">33 888 200 - 55</a>
                     </span>
-                  </div>
+                  </div> */}
                   <div className="tp-header-btn-three">
                     <Link to="/contact-us" className="yellow-btn">
                       <i className="flaticon-enter"></i> Free Quote
