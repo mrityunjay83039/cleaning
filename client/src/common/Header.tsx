@@ -38,7 +38,7 @@ const Header = () => {
                   <Link to="/">
                     <CardMedia
                       component="img"
-                      image="./logo.png"
+                      image="/logo.png"
                       alt="Logo"
                       sx={{ width: "120px" }}
                     />

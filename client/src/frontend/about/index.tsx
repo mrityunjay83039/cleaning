@@ -33,10 +33,10 @@ const About = () => {
                   style={{width:"80%"}}
                 />
                 <div className="tp-about-img-two-badge">
-                  <h3>20</h3>
+                  <h3>5</h3>
                   <h5>
-                    years <br />
-                    Experience
+                  Star <br />
+                  Rated on Google
                   </h5>
                 </div>
               </div>
