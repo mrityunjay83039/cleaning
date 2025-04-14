@@ -10,6 +10,7 @@ import Testimonial from "../../common/Testimonial";
 import { Link } from "react-router-dom";
 import Service from "../../common/service";
 import { serviceList_servicePage } from "../../config/constants";
+import BlogList from "../../common/BlogList";
 
 const HomePage = () => {
   return (
@@ -495,42 +496,14 @@ const HomePage = () => {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
-            {[BlogImg7, BlogImg8, BlogImg9].map((img, index) => (
-              <Grid item lg={4} md={6} key={index}>
-                <div
-                  className="tp-blog-three mb-30 wow fadeInUp"
-                  data-wow-delay={`${0.4 + index * 0.3}s`}
-                >
-                  <div className="tp-blog-three-img">
-                    <Link to="/services/services">
-                      <img src={img} className="img" alt="img-not-found" />
-                    </Link>
-                  </div>
-                  <div className="tp-blog-three-text">
-                    <div className="tp-blog-three-text-meta">
-                      <Link to="/services">By Jhon Cardo</Link>
-                      <span>_ _</span>
-                      <Link to="/services">Jun 02 - 2021</Link>
-                    </div>
-                    <Typography
-                      variant="h4"
-                      className="tp-blog-three-title mb-15"
-                    >
-                      <Link to="/services">
-                        Baoreet and placerat amet class rempus manusp curpise
-                      </Link>
-                    </Typography>
-                    <div className="tp-blog-three-link">
-                      <Link to="/services">
-                        <i className="flaticon-enter"></i> Continue Reading
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </Grid>
-            ))}
-          </Grid>
+          <Box display="flex" justifyContent="center" gap={2}>
+            <BlogList noOfPost={3}/>
+          </Box>
+          <Box display="flex" justifyContent="center">
+            <Link className="theme-btn" to="/blogs">
+              <i className="flaticon-enter"></i> View All
+            </Link>
+          </Box>
         </Container>
         {/* Contact Area Start Here */}
         <div className="tp-contact-cta-area position-relative pt-85">
