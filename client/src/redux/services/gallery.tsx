@@ -25,7 +25,7 @@ export const galleryApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllGalleries: builder.query<Gallery[], void>({
       query: () => ({
-        url: ApiRouteService.gallery,
+        url: ApiRouteService.gallery+'/public',
         method: "GET",
       }),
       providesTags: ["Gallery"], 

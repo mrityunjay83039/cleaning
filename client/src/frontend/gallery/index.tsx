@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Grid, Pagination } from "swiper/modules";
 import { useGetAllGalleriesQuery } from "../../redux/services/gallery";
 import {
   Dialog,
