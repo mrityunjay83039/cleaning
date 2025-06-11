@@ -9,7 +9,6 @@ const BlogDetails = () => {
   const { slug } = useParams();
   const { data: blogDetail } = useGetBlogBySlugQuery(slug);
   console.log("blogDetail: ", blogDetail?.blog);
-
   return (
     <>
       <BreadCrumb breadCrumTitle="Blog Posts" pageName="Blog" />
@@ -50,14 +49,21 @@ const BlogDetails = () => {
                               </li>
                             </ul>
                           </div>
-                          <h3 className="ablog__text--title4 mb-20">
+                          {/* <h3 className="ablog__text--title4 mb-20">
                             {blogDetail?.blog?.title}
-                          </h3>
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: blogDetail?.blog?.blogDetail,
-                            }}
-                          />
+                          </h3> */}
+                          <div className="service_title">
+                            <h3 className="tp-service-three-title heading-color-black-with-hover mb-20">
+                                {blogDetail?.blog?.title}
+                            </h3>
+                          </div>
+                          <div className="tp-service-three-text">
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: blogDetail?.blog?.blogDetail,
+                              }}
+                            />
+                          </div>
                           {/* <div className="blog__deatails--tag wow fadeInUp">
                             <span>Post Tags : </span>
                             <a href="#">Landing</a>
@@ -92,7 +98,6 @@ const BlogDetails = () => {
                 <BlogSideBar/>
               </div>
             </div>
-           
           </div>
         </div>
       </section>

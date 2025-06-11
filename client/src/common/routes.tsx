@@ -124,6 +124,14 @@ const frontendRoutes = createBrowserRouter([
         element: <BlogDetails />,
       },
       {
+        path: "/blogs/:author",
+        element: <Blogs />,
+      },
+      {
+        path: "/blogs/category/:categoryslug",
+        element: <Blogs />,
+      },
+      {
         path: "/gallery",
         element: <ImageGallery />,
       },

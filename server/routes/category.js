@@ -3,6 +3,7 @@ const router = express.Router();
 const Category = require("../model/Category");
 const mongoose = require("mongoose");
 const checkAuth = require("../middleware/checkAuth");
+const slugify = require("slugify");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.JWT_SECRET || "zibrish 123";
@@ -16,17 +17,21 @@ const verifyToken = (req) => {
 
 // Add Category
 router.post("/", checkAuth, async (req, res) => {
+
+  const slug = slugify(req.body.title, { lower: true, strict: true });
+
   try {
     const verify = verifyToken(req);
     const newCategory = new Category({
       _id: new mongoose.Types.ObjectId(),
       userId: verify.userId,
       title: req.body.title,
+      slug: slug,
       imageUrl: req.body.imageUrl,
     });
 
     const result = await newCategory.save();
-    res.status(201).json({ success: false, newCategory: result });
+    res.status(201).json({ success: true, newCategory: result });
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, error: err.message });
@@ -59,7 +64,7 @@ router.get("/", async (req, res) => {
 // Get All Categories (Public API)
 router.get("/public", async (req, res) => {
   try {
-    const categories = await Category.find().select("_id title imageUrl");
+    const categories = await Category.find().select("_id title slug imageUrl");
 
     res.status(200).json({ success: true, categoryList: categories });
   } catch (err) {
@@ -115,11 +120,14 @@ router.delete("/:id", checkAuth, async (req, res) => {
 
 // Update Category
 router.put("/:id", checkAuth, async (req, res) => {
+
+  const slug = slugify(req.body.title, { lower: true, strict: true });
+
   try {
     const verify = verifyToken(req);
     const updatedCategory = await Category.findOneAndUpdate(
       { _id: req.params.id, userId: verify.userId },
-      { $set: { title: req.body.title, imageUrl: req.body.imageUrl } },
+      { $set: { title: req.body.title, slug, imageUrl: req.body.imageUrl } },
       { new: true }
     );
 

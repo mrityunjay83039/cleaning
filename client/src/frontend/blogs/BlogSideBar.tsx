@@ -86,7 +86,7 @@ const BlogSideBar = () => {
               categoriesData?.categoryList?.map((el) => {
                 return (
                   <li key={el._id}>
-                    <Link to="#">{el.title}</Link>
+                    <Link to={`/blogs/category/${el.slug}`}>{el.title}</Link>
                   </li>
                 );
               })}
