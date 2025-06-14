@@ -1,29 +1,29 @@
 import BreadCrumb from "../../common/BreadCrumb";
-import BlogSideBar from "./BlogSideBar";
-import BlogList from "../../common/BlogList";
-import {
-  useGetAllBlogsQuery,
-} from "../../redux/services/blog";
+import { useParams } from "react-router-dom";
+import JobList from "./JobList";
+import { useGetAllPublicJobsQuery } from "../../redux/services/job";
 
-const Blogs = () => {
+const Jobs = () => {
 
-  const { data: blogData } = useGetAllBlogsQuery();
+  const { data: jobData } = useGetAllPublicJobsQuery();
 
   return (
     <>
-      <BreadCrumb breadCrumTitle="Blog Posts" pageName="Blog" />
+      <BreadCrumb breadCrumTitle="Job" pageName="Jobs" />
       <section className="blog-sidebar-area pt-120 pb-90">
         <div className="container">
           <div className="tp-custom-container-box">
             <div className="row">
-              <div className="col-lg-9">
+              <div className="col-lg-12">
                 <div className="ablog__sidebar--wrapper mr-50">
-                  <BlogList noOfPost="1" blogData={blogData} />
+                  <JobList noOfPost="1" jobData={jobData} />
                 </div>
               </div>
+              {/* 
               <div className="col-lg-3">
                 <BlogSideBar />
-              </div>
+              </div> 
+              */}
             </div>
           </div>
         </div>
@@ -32,4 +32,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default Jobs;

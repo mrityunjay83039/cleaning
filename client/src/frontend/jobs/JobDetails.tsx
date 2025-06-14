@@ -1,14 +1,12 @@
-import React from "react";
 import { useParams } from "react-router-dom";
-import { useGetBlogBySlugQuery } from "../../redux/services/blog";
 import BreadCrumb from "../../common/BreadCrumb";
-import { isEmptyObject } from "../../utils/commonFunction";
-import BlogSideBar from "./BlogSideBar";
+import { useGetJobBySlugQuery } from "../../redux/services/job";
 
-const BlogDetails = () => {
+const JobDetails = () => {
+  
   const { slug } = useParams();
-  const { data: blogDetail } = useGetBlogBySlugQuery(slug);
-  console.log("blogDetail: ", blogDetail?.blog);
+  const { data: jobDetail } = useGetJobBySlugQuery(slug)
+  
   return (
     <>
       <BreadCrumb breadCrumTitle="Blog Posts" pageName="Blog" />
@@ -16,14 +14,14 @@ const BlogDetails = () => {
         <div className="container">
           <div className="tp-custom-container-box">
             <div className="row">
-              <div className="col-lg-9">
-                {blogDetail?.blog && (
+              <div className="col-lg-12">
+                {jobDetail?.job && (
                   <>
                     <div className="blog__details--wrapper mr-50 mb-50">
                       <div className="ablog ablog-4 mb-55">
                         <div className="ablog__img wow fadeInUp">
                           <img
-                            src={blogDetail.blog.imageUrl}
+                            src={jobDetail?.job?.imageUrl}
                             className="img-fluid"
                             alt="img"
                           />
@@ -31,20 +29,22 @@ const BlogDetails = () => {
                         <div className="ablog__text ablog__text4">
                           <div className="ablog__meta ablog__meta4">
                             <ul>
-                              {/* <li>
+                              {/* 
+                              <li>
                                 <a href="blog-details.html">
                                   <i className="far fa-calendar-check"></i>{" "}
                                   January 15, 2021{" "}
                                 </a>
-                              </li> */}
+                              </li> 
                               <li>
-                                  <i className="far fa-user"></i> {blogDetail?.blog?.authorName}
+                                  <i className="far fa-user"></i> {jobDetail?.job?.authorName}
                               </li>
                               <li>
-                                <a href={`/blogs/category/${blogDetail?.blog?.categoryId?.slug}`}>
+                                <a href={`/blogs/category/${jobDetail?.job?.categoryId?.slug}`}>
                                   {blogDetail?.blog?.categoryTitle}
                                 </a>
-                              </li>
+                              </li> 
+                              */}
                             </ul>
                           </div>
                           {/* <h3 className="ablog__text--title4 mb-20">
@@ -52,13 +52,13 @@ const BlogDetails = () => {
                           </h3> */}
                           <div className="service_title">
                             <h3 className="mb-20">
-                                {blogDetail?.blog?.title}
+                              {jobDetail?.job?.title}
                             </h3>
                           </div>
                           <div className="tp-service-three-text">
                             <div
                               dangerouslySetInnerHTML={{
-                                __html: blogDetail?.blog?.blogDetail,
+                                __html: jobDetail?.job?.jobDetail,
                               }}
                             />
                           </div>
@@ -92,9 +92,9 @@ const BlogDetails = () => {
                   </>
                 )}
               </div>
-              <div className="col-lg-3">
+              {/* <div className="col-lg-3">
                 <BlogSideBar/>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -103,4 +103,4 @@ const BlogDetails = () => {
   );
 };
 
-export default BlogDetails;
+export default JobDetails;

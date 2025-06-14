@@ -1,19 +1,19 @@
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 
-const BlogList = ({ noOfPost, blogData }) => {
-
+const JobList = ({ noOfPost, jobData }) => {
+  
   const [currentPage, setCurrentPage] = useState(1);
 
-  if (!blogData || !blogData.blogs.length) return <p className="no-blog-message">No blog found.</p>;
+  if (!jobData || !jobData?.jobs?.length) return <p className="no-blog-message">No blog found.</p>;
 
   const postsPerPage =
-    noOfPost === "All" ? blogData.blogs.length : parseInt(noOfPost);
+    noOfPost === "All" ? jobData?.jobs?.length : parseInt(noOfPost);
 
-  const totalPages = Math.ceil(blogData.blogs.length / postsPerPage);
+  const totalPages = Math.ceil(jobData?.jobs?.length / postsPerPage);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = blogData.blogs.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = jobData?.jobs.slice(indexOfFirstPost, indexOfLastPost);
 
   const goToPage = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -36,18 +36,18 @@ const BlogList = ({ noOfPost, blogData }) => {
           <div className="ablog__text ablog__text4">
             <div className="service_title">
               <h4 className="tp-service-three-title heading-color-black-with-hover mb-20">
-                <Link to={`/blogs/${el.slug}`}>{el.title}</Link>
+                <Link to={`/jobs/${el.slug}`}>{el.title}</Link>
               </h4>
             </div>
             <div className="tp-service-three-text">
               <div
                 dangerouslySetInnerHTML={{
-                  __html: el.blogDetail.slice(0, 200) + "...",
+                  __html: el.jobDetail.slice(0, 200) + "...",
                 }}
               />
             </div>
             <div className="ablog__btn4">
-              <Link to={`/blogs/${el.slug}`} className="theme-btn">
+              <Link to={`/jobs/${el.slug}`} className="theme-btn">
                 <i className="flaticon-enter"></i> Read More
               </Link>
             </div>
@@ -115,4 +115,4 @@ const BlogList = ({ noOfPost, blogData }) => {
   );
 };
 
-export default BlogList;
+export default JobList;

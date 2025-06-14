@@ -6,6 +6,7 @@ const Category = require("../model/Category");
 const mongoose = require("mongoose");
 const checkAuth = require("../middleware/checkAuth");
 const jwt = require("jsonwebtoken");
+const generateUniqueSlug = require("../utils/generateUniqueSlug");
 require("dotenv").config();
 
 const JWT_SECRET = process.env.JWT_SECRET || "zibrish 123";
@@ -31,8 +32,9 @@ router.post("/", checkAuth, async (req, res) => {
     const { userId, firstName, lastName } = req.user;
     const { title, imageUrl, categoryTitle, categoryId, blogDetail } = req.body;
 
-    // Generate slug and check if it exists
-    const slug = generateSlug(title);
+    const slug = await generateUniqueSlug(title, Blog, 'slug')
+    console.log("slug:", slug);
+    
     const existingBlog = await Blog.findOne({ slug });
     if (existingBlog) {
       return res.status(400).json({
@@ -61,7 +63,7 @@ router.post("/", checkAuth, async (req, res) => {
   }
 });
 
-// ✅ Get All Blogs
+// Get All Blogs
 router.get("/", async (req, res) => {
   try {
     const blogs = await Blog.find()
@@ -111,21 +113,25 @@ router.get("/slug/:slug", async (req, res) => {
   try {
     const { slug } = req.params;
 
+    if (!slug || typeof slug !== "string") {
+      return res.status(400).json({ success: false, message: "Invalid slug" });
+    }
+
     const blog = await Blog.findOne({ slug })
       .populate("userId", "firstName lastName")
+      .populate("categoryId", "title slug imageUrl")
       .select(
         "_id userId title slug imageUrl categoryTitle categoryId blogDetail authorName createdAt updatedAt"
-      );
+      )
+      .lean();
 
     if (!blog) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Blog not found" });
+      return res.status(404).json({ success: false, message: "Blog not found" });
     }
 
     res.status(200).json({ success: true, blog });
   } catch (err) {
-    console.error("Error fetching blog by slug:", err);
+    console.error("Error fetching blog by slug:", err.message, err.stack);
     res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 });
@@ -149,22 +155,16 @@ router.get("/blogs/category/:id", async (req, res) => {
 
 // ✅ Get Blogs by Category slug
 router.get("/blogs/category/categoryslug/:categoryslug", async (req, res) => {
+
   try {
+    let blogs = []
     const category = await Category.findOne({ slug: req.params.categoryslug });
 
     if (!category) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Category not found" });
+      res.status(200).json({ success: true, blogs });
     }
 
-    const blogs = await Blog.find({ categoryId: category._id });
-
-    if (!blogs.length) {
-      return res
-        .status(404)
-        .json({ success: false, message: "No blogs found in this category" });
-    }
+    blogs = await Blog.find({ categoryId: category._id });
 
     res.status(200).json({ success: true, blogs });
   } catch (err) {
@@ -210,8 +210,7 @@ router.put("/:id", checkAuth, async (req, res) => {
     const { userId, firstName, lastName } = req.user;
     const { title, imageUrl, categoryTitle, categoryId, blogDetail } = req.body;
 
-    // Generate a new slug
-    const slug = generateSlug(title);
+    const slug = await generateUniqueSlug(title, Blog, 'slug')
 
     // Check if another blog already has this slug
     const existingBlog = await Blog.findOne({

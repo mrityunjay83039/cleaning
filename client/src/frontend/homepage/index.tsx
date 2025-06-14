@@ -11,8 +11,10 @@ import { Link } from "react-router-dom";
 import Service from "../../common/service";
 import { serviceList_servicePage } from "../../config/constants";
 import BlogList from "../../common/BlogList";
+import { useGetAllBlogsQuery } from "../../redux/services/blog";
 
 const HomePage = () => {
+  const { data: blogData } = useGetAllBlogsQuery()
   return (
     <main>
       {/* Hero Area Start Here */}
@@ -497,7 +499,7 @@ const HomePage = () => {
             </Grid>
           </Grid>
           <Box display="flex" justifyContent="center" gap={2}>
-            <BlogList noOfPost={3}/>
+            <BlogList noOfPost={3} blogData={blogData}/>
           </Box>
           <Box display="flex" justifyContent="center">
             <Link className="theme-btn" to="/blogs">

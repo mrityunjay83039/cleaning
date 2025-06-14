@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const checkAuth = require("../middleware/checkAuth");
 const slugify = require("slugify");
 const jwt = require("jsonwebtoken");
+const generateUniqueSlug = require("../utils/generateUniqueSlug");
 
 const JWT_SECRET = process.env.JWT_SECRET || "zibrish 123";
 
@@ -18,7 +19,7 @@ const verifyToken = (req) => {
 // Add Category
 router.post("/", checkAuth, async (req, res) => {
 
-  const slug = slugify(req.body.title, { lower: true, strict: true });
+  const slug = await generateUniqueSlug( req.body.title, Category, 'slug')
 
   try {
     const verify = verifyToken(req);
@@ -121,7 +122,7 @@ router.delete("/:id", checkAuth, async (req, res) => {
 // Update Category
 router.put("/:id", checkAuth, async (req, res) => {
 
-  const slug = slugify(req.body.title, { lower: true, strict: true });
+  const slug = await generateUniqueSlug( req.body.title, Category, 'slug')
 
   try {
     const verify = verifyToken(req);

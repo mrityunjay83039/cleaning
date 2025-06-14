@@ -86,6 +86,9 @@ const Header = () => {
                         </ul> */}
                       </li>
                       <li className="menu-item-has-children">
+                        <Link to="/jobs">Jobs</Link>
+                      </li>
+                      <li className="menu-item-has-children">
                         <Link to="/gallery">Gallery</Link>
                       </li>
                       <li>

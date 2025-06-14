@@ -31,7 +31,15 @@ export const jobApi = apiSlice.injectEndpoints({
         url: ApiRouteService.job,
         method: "GET",
       }),
-      providesTags: ["Job"], // 👈 Provides a cache tag for jobs
+      providesTags: ["Job"], 
+    }),
+
+    getAllPublicJobs: builder.query<Job[], void>({
+      query: () => ({
+        url: ApiRouteService.job+'/public',
+        method: "GET",
+      }),
+      providesTags: ["Job"], 
     }),
 
     getJobById: builder.query<Job, string>({
@@ -40,6 +48,14 @@ export const jobApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
       providesTags: (result, error, id) => [{ type: "Job", id }],
+    }),
+
+    getJobBySlug: builder.query<Job, string>({
+      query: (slug) => ({
+        url: `${ApiRouteService.job}/slug/${slug}`,
+        method: "GET",
+      }),
+      providesTags: (result, error, slug) => [{ type: "Job", slug }],
     }),
 
     addJob: builder.mutation<Job, AddJobRequest>({
@@ -72,6 +88,8 @@ export const jobApi = apiSlice.injectEndpoints({
 
 export const { 
   useGetAllJobsQuery, 
+  useGetAllPublicJobsQuery,
+  useGetJobBySlugQuery,
   useAddJobMutation, 
   useGetJobByIdQuery, 
   useUpdateJobMutation, 

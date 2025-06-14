@@ -3,13 +3,11 @@ import {
   Card,
   CardContent,
   CircularProgress,
-  MenuItem,
-  Select,
   TextField,
 } from "@mui/material";
 import { FormProvider, useForm, Controller } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { useAddJobMutation } from "../../../redux/services/job";
@@ -26,6 +24,7 @@ const AddJob = () => {
   const [content, setContent] = useState("");
   const [imagePath, setImagePath] = useState("");
   const [isUploading, setIsUploading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [addJob] = useAddJobMutation();
 
@@ -85,9 +84,19 @@ const AddJob = () => {
   };
 
   const onSubmitHandler = async (values: JobFormData) => {
+    if (!values.imageUrl) {
+      toast.error("Please upload an image.");
+      return;
+    }
+
+    if (!values.jobDetail || values.jobDetail.trim() === "" || values.jobDetail.trim() === "<p>Start typing here...</p>") {
+      toast.error("Please provide job details.");
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
       const res = await addJob(values);
-
       if (res && res.data) {
         toast.success("Job added successfully");
         navigate("/dashboard/jobs");
@@ -95,6 +104,8 @@ const AddJob = () => {
     } catch (error) {
       console.error("Add job error:", error);
       toast.error("Failed to add job. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -104,42 +115,78 @@ const AddJob = () => {
         <h2 className="text-xl font-bold mb-4">Add New Job</h2>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmitHandler)}>
-            {/* Title Field */}
+
+            {/* Title */}
             <Controller
               name="title"
               control={control}
               rules={{ required: "Title is required" }}
               render={({ field }) => (
-                <TextField {...field} label="Job Title" fullWidth margin="normal" error={!!errors.title} helperText={errors.title?.message} />
+                <TextField
+                  {...field}
+                  label="Job Title"
+                  fullWidth
+                  margin="normal"
+                  error={!!errors.title}
+                  helperText={errors.title?.message}
+                />
               )}
             />
 
             {/* Image Upload */}
-            <div className="mb-4">
-              <input type="file" onChange={handleImageChange} className="w-full p-2 border mt-4" />
+            <div className="mb-4 mt-4">
+              <label className="block">
+                <span className="text-gray-700">Upload Image</span>
+                <input
+                  type="file"
+                  onChange={handleImageChange}
+                  className="block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-full file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-blue-50 file:text-blue-700
+                  hover:file:bg-blue-100 mt-2"
+                />
+              </label>
+              {isUploading && <CircularProgress size={24} className="mt-4" />}
+              {imagePath && !isUploading && (
+                <img src={imagePath} alt="Uploaded" className="w-full mt-4 rounded" />
+              )}
             </div>
-            {isUploading ? <CircularProgress size={24} className="mt-4" /> : imagePath && <img src={imagePath} alt="Uploaded" className="w-full mt-2 mb-2" />}
 
-            {/* Job Detail Editor */}
-            <Editor
-              apiKey="6rq58torrow1webfnxy8wn0e6zqtzjoemmprd735oh84809n"
-              initialValue="<p>Start typing here...</p>"
-              init={{
-                height: 400,
-                menubar: true,
-                plugins: [
-                  "advlist autolink lists link image charmap print preview anchor",
-                  "searchreplace visualblocks code fullscreen",
-                  "insertdatetime media table paste code help wordcount",
-                ],
-                toolbar:
-                  "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help",
-              }}
-              onEditorChange={handleEditorChange}
-            />
+            {/* TinyMCE Editor */}
+            <div className="mt-6">
+              <Editor
+                apiKey="6rq58torrow1webfnxy8wn0e6zqtzjoemmprd735oh84809n"
+                initialValue="<p>Start typing here...</p>"
+                init={{
+                  height: 400,
+                  menubar: "file edit view insert format tools table help",
+                  plugins: [
+                    "advlist", "autolink", "lists", "link", "image", "charmap", "print", "preview", "anchor",
+                    "searchreplace", "visualblocks", "code", "fullscreen",
+                    "insertdatetime", "media", "table", "paste", "code", "help", "wordcount"
+                  ],
+                  toolbar:
+                    "undo redo | formatselect | bold italic underline strikethrough backcolor | " +
+                    "alignleft aligncenter alignright alignjustify | " +
+                    "bullist numlist outdent indent | link image media table | " +
+                    "code preview fullscreen | removeformat help",
+                  content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                }}
+                onEditorChange={handleEditorChange}
+              />
+            </div>
 
             {/* Submit Button */}
-            <Button type="submit" variant="contained" className="w-full mt-4">Submit</Button>
+            <Button
+              type="submit"
+              variant="contained"
+              className="w-full mt-6"
+              disabled={isUploading || isSubmitting}
+            >
+              {isSubmitting ? "Submitting..." : isUploading ? "Uploading Image..." : "Submit"}
+            </Button>
           </form>
         </FormProvider>
       </CardContent>

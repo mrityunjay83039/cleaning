@@ -39,6 +39,9 @@ import AddGallery from "../frontend/dashboard/galleries/AddGallery";
 import EditGallery from "../frontend/dashboard/galleries/EditGallery";
 import ImageGallery from "../frontend/gallery";
 import BlogDetails from "../frontend/blogs/BlogDetails";
+import CategoryBlog from "../frontend/blogs/CategoryBlogs";
+import Jobs from "../frontend/jobs/Jobs";
+import JobDetails from "../frontend/jobs/JobDetails";
 
 const frontendRoutes = createBrowserRouter([
   {
@@ -129,7 +132,15 @@ const frontendRoutes = createBrowserRouter([
       },
       {
         path: "/blogs/category/:categoryslug",
-        element: <Blogs />,
+        element: <CategoryBlog />,
+      },
+      {
+        path: "/jobs",
+        element: <Jobs />
+      },
+      {
+        path: "/jobs/:slug",
+        element: <JobDetails />,
       },
       {
         path: "/gallery",
