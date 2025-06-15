@@ -202,7 +202,7 @@ const EditPost = () => {
             />
 
             {/* Submit Button */}
-            <Button type="submit" variant="contained" disabled={formSubmitting} className="w-full">
+            <Button type="submit" variant="contained" disabled={formSubmitting} className="w-full mt-4">
               {formSubmitting ? <CircularProgress size={24} /> : "Update Post"}
             </Button>
           </form>

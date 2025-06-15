@@ -14,7 +14,7 @@ import { useAddJobMutation } from "../../../redux/services/job";
 
 interface JobFormData {
   title: string;
-  imageUrl: string;
+  imageUrl?: string;
   jobDetail: string;
   authorName: string;
 }
@@ -84,10 +84,10 @@ const AddJob = () => {
   };
 
   const onSubmitHandler = async (values: JobFormData) => {
-    if (!values.imageUrl) {
-      toast.error("Please upload an image.");
-      return;
-    }
+    // if (!values.imageUrl) {
+    //   toast.error("Please upload an image.");
+    //   return;
+    // }
 
     if (!values.jobDetail || values.jobDetail.trim() === "" || values.jobDetail.trim() === "<p>Start typing here...</p>") {
       toast.error("Please provide job details.");
@@ -95,6 +95,7 @@ const AddJob = () => {
     }
 
     setIsSubmitting(true);
+
     try {
       const res = await addJob(values);
       if (res && res.data) {

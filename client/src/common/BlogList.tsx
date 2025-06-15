@@ -30,26 +30,37 @@ const BlogList = ({ noOfPost, blogData }) => {
           key={el._id}
           style={{ flex: 1 }}
         >
-          <div className="ablog__img">
-            <img src={el.imageUrl} className="img-fluid" alt={el.title} />
-          </div>
-          <div className="ablog__text ablog__text4">
-            <div className="service_title">
-              <h4 className="tp-service-three-title heading-color-black-with-hover mb-20">
-                <Link to={`/blogs/${el.slug}`}>{el.title}</Link>
-              </h4>
+          <div className="row g-0 align-items-stretch mb-4">
+            <div className="col-md-3">
+              <div className="ablog__img">
+                <img 
+                  src={el.imageUrl} 
+                  alt={el.title}                     
+                  className="img-fluid h-100 object-fit-cover"
+                  style={{ objectFit: "cover", width: "100%" }}
+                />
+              </div>
             </div>
-            <div className="tp-service-three-text">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: el.blogDetail.slice(0, 200) + "...",
-                }}
-              />
-            </div>
-            <div className="ablog__btn4">
-              <Link to={`/blogs/${el.slug}`} className="theme-btn">
-                <i className="flaticon-enter"></i> Read More
-              </Link>
+            <div className="col-md-9">
+              <div className="ablog__text ablog__text4">
+                <div className="service_title">
+                  <h4 className="tp-service-three-title heading-color-black-with-hover mb-20">
+                    <Link to={`/blogs/${el.slug}`}>{el.title}</Link>
+                  </h4>
+                </div>
+                <div className="tp-service-three-text">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: el.blogDetail.slice(0, 200) + "...",
+                    }}
+                  />
+                </div>
+                <div className="ablog__btn4">
+                  <Link to={`/blogs/${el.slug}`} className="theme-btn">
+                    <i className="flaticon-enter"></i> Read More
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -64,6 +75,22 @@ const BlogList = ({ noOfPost, blogData }) => {
               data-wow-delay=".5s"
             >
               <ul>
+                {/* Previous Button */}
+                {currentPage > 1 && (
+                  <li>
+                    <a
+                      className="prev page-numbers"
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        goToPage(currentPage - 1);
+                      }}
+                    >
+                      <i className="fal fa-long-arrow-left"></i>
+                    </a>
+                  </li>
+                )}
+
                 {/* Page Numbers */}
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                   (page) => (

@@ -31,7 +31,7 @@ router.get("/", checkAuth, async (req, res) => {
   try {
     const jobs = await Job.find({ userId: req.user.userId }).select(
       "_id title imageUrl slug jobDetail userId createdAt updatedAt"
-    );
+    ).sort({ createdAt: -1 });
     res.status(200).json({ success: true, jobs });
   } catch (err) {
     console.error(err);
@@ -44,7 +44,7 @@ router.get("/public", async (req, res) => {
   try {
     const jobs = await Job.find().select(
       "_id title imageUrl slug jobDetail createdAt updatedAt"
-    );
+    ).sort({ createdAt: -1 });
     res.status(200).json({ success: true, jobs });
   } catch (err) {
     console.error(err);
