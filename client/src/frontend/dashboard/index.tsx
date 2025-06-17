@@ -1,18 +1,36 @@
 import React from "react";
+import { useGetAllJobsQuery } from "../../redux/services/job";
+import { useGetAllBlogsQuery } from "../../redux/services/blog";
+import { useGetAllGalleriesQuery } from "../../redux/services/gallery";
 
 const Dashboard: React.FC = () => {
+
+  const { data: jobData, isLoading: jobsLoading, error: jobsError } = useGetAllJobsQuery();
+  const { data: blogData, isLoading: blogsLoading, error: blogsError } = useGetAllBlogsQuery();
+  const { data: GalleryData, isLoading: galleriesLoading, error: galleriesError } = useGetAllGalleriesQuery();
+  
+  if (jobsLoading || blogsLoading || galleriesLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (jobsError || blogsError || galleriesError) {
+    return <p>Error loading dashboard data.</p>;
+  }
+
   return (
     <>
       {/* <!-- Page Heading --> */}
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-        {/* <a
+        {/* 
+        <a
                   href="#"
                   className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                 >
                   <i className="fas fa-download fa-sm text-white-50"></i>{" "}
                   Generate Report
-                </a> */}
+        </a> 
+        */}
       </div>
 
       {/* <!-- Content Row --> */}
@@ -27,7 +45,7 @@ const Dashboard: React.FC = () => {
                     Total Blog Posts
                   </div>
                   <div className="h5 mb-0 font-weight-bold text-gray-800">
-                    0
+                    {blogData?.blogs?.length}
                   </div>
                 </div>
                 <div className="col-auto">
@@ -48,7 +66,7 @@ const Dashboard: React.FC = () => {
                     Job Posts
                   </div>
                   <div className="h5 mb-0 font-weight-bold text-gray-800">
-                    0
+                    {jobData?.jobs?.length}
                   </div>
                 </div>
                 <div className="col-auto">
@@ -101,7 +119,7 @@ const Dashboard: React.FC = () => {
                     Gallery Images
                   </div>
                   <div className="h5 mb-0 font-weight-bold text-gray-800">
-                    0
+                    { GalleryData?.galleries?.length}
                   </div>
                 </div>
                 <div className="col-auto">
@@ -124,7 +142,7 @@ const Dashboard: React.FC = () => {
               <h6 className="m-0 font-weight-bold text-primary">
                 Recent Blog Posts
               </h6>
-              <div className="dropdown no-arrow">
+              {/* <div className="dropdown no-arrow">
                 <a
                   className="dropdown-toggle"
                   href="#"
@@ -152,12 +170,26 @@ const Dashboard: React.FC = () => {
                     Something else here
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
             {/* <!-- Card Body --> */}
             <div className="card-body">
-              <div className="chart-area">
+              {/* <div className="chart-area">
                 <canvas id="myAreaChart"></canvas>
+              </div> */}
+              <ul className="list-group">
+                {blogData?.blogs?.slice(0, 10).map((blog: any) => (
+                  <li key={blog.id} className="list-group-item">
+                    <a href={`/blogs/${blog.slug}`} target="_blank">
+                      <strong>{blog.title}</strong>
+                    </a>
+                    <br />
+                    <small>{new Date(blog.createdAt).toLocaleDateString()}</small>
+                  </li>
+                ))}
+              </ul>
+              <div className="text-right mt-2">
+                <a href="/blogs" className="btn btn-sm btn-primary">View All Blogs</a>
               </div>
             </div>
           </div>
@@ -171,7 +203,7 @@ const Dashboard: React.FC = () => {
               <h6 className="m-0 font-weight-bold text-primary">
                 Recent Job Posts
               </h6>
-              <div className="dropdown no-arrow">
+              {/* <div className="dropdown no-arrow">
                 <a
                   className="dropdown-toggle"
                   href="#"
@@ -199,11 +231,11 @@ const Dashboard: React.FC = () => {
                     Something else here
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
             {/* <!-- Card Body --> */}
             <div className="card-body">
-              <div className="chart-pie pt-4 pb-2">
+              {/* <div className="chart-pie pt-4 pb-2">
                 <canvas id="myPieChart"></canvas>
               </div>
               <div className="mt-4 text-center small">
@@ -216,6 +248,20 @@ const Dashboard: React.FC = () => {
                 <span className="mr-2">
                   <i className="fas fa-circle text-info"></i> Referral
                 </span>
+              </div> */}
+              <ul className="list-group">
+                {jobData?.jobs?.slice(0, 10).map((job: any) => (
+                  <li key={job.id} className="list-group-item">
+                    <a href={`/jobs/${job.slug}`} target="_blank">
+                      <strong>{job.title}</strong>
+                    </a>
+                    <br />
+                    <small>{new Date(job.createdAt).toLocaleDateString()}</small>
+                  </li>
+                ))}
+              </ul>
+              <div className="text-right mt-2">
+                <a href="/jobs" className="btn btn-sm btn-primary">View All Jobs</a>
               </div>
             </div>
           </div>

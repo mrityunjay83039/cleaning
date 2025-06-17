@@ -259,7 +259,7 @@ const DashboardTopBar: React.FC = () => {
             className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
             aria-labelledby="userDropdown"
           >
-            <a className="dropdown-item" href="#">
+            {/* <a className="dropdown-item" href="#">
               <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
               Profile
             </a>
@@ -270,7 +270,7 @@ const DashboardTopBar: React.FC = () => {
             <a className="dropdown-item" href="#">
               <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
               Activity Log
-            </a>
+            </a> */}
             <div className="dropdown-divider"></div>
             <Link
               className="dropdown-item"

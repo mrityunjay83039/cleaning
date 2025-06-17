@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { logOut } from "../redux/reducer/auth";
 import { useNavigate } from "react-router-dom";
@@ -8,37 +8,33 @@ import { toast } from "react-toastify";
 const Logout = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  const [isLoggedOut, setIsLoggedOut] = useState(false);
-
   const [logoutUser] = useUserLogoutMutation();
   const refreshToken = useAppSelector((state) => state.auth.refreshToken);
 
-  const handleLogout = async () => {
-    try {
-      const res = await logoutUser({
-        refreshToken: refreshToken,
-      });
-      if (res?.data?.success) {
-        setIsLoggedOut(true);
-        toast.success(res?.data?.msg, {
+  useEffect(() => {
+    const handleLogout = async () => {
+      try {
+        const res = await logoutUser({ refreshToken });
+        if (res?.data?.success) {
+          toast.success(res?.data?.msg, {
+            position: "top-center",
+          });
+          dispatch(logOut());
+          navigate("/adminlogin");
+        }
+      } catch (error) {
+        console.log("error in logout: ", error);
+        toast.error("Logout failed. Please try again.", {
           position: "top-center",
         });
-        dispatch(logOut());
-        navigate("/adminlogin");
       }
-    } catch (error) {
-      console.log("error in logout: ", error);
-    }
-  };
-  useEffect(() => {
-    if (!isLoggedOut) {
-      handleLogout();
-    }
-  }, [isLoggedOut]);
+    };
 
+    handleLogout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return null;
+  return <p>Logging out...</p>;
 };
 
 export default Logout;
