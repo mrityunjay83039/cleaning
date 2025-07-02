@@ -6708,6 +6708,28 @@ select {
   margin-right: 2px;
 }
 
+.ablognew__meta ul{
+  padding-left: 0px !important;
+}
+
+.ablognew__meta ul li {
+  display: inline-block;
+  list-style: none;
+  margin-right: 15px;
+}
+.ablognew__meta ul li:last-child {
+  margin-right: 0px;
+}
+@media (max-width: 767px) {
+  .ablognew__meta ul li {
+    margin-right: 10px;
+  }
+}
+
+.ablognew__meta ul li a i {
+  margin-right: 2px;
+}
+
 .ablog__text4 blockquote {
   padding: 40px;
   color: #666;

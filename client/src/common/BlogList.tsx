@@ -24,14 +24,8 @@ const BlogList = ({ noOfPost, blogData }) => {
   return (
     <>
       {currentPosts.map((el) => (
-        <div
-          className="ablog ablog-4 mb-55 wow fadeInUp"
-          data-wow-delay=".4s"
-          key={el._id}
-          style={{ flex: 1 }}
-        >
           <div className="row g-0 align-items-stretch mb-4">
-            <div className="col-md-3">
+            <div className="col-md-4">
               <div className="ablog__img">
                 <img 
                   src={el.imageUrl} 
@@ -41,10 +35,10 @@ const BlogList = ({ noOfPost, blogData }) => {
                 />
               </div>
             </div>
-            <div className="col-md-9">
-              <div className="ablog__text ablog__text4">
+            <div className="col-md-8">
+              <div className="ablog__text">
                 <div className="service_title">
-                  <h4 className="tp-service-three-title heading-color-black-with-hover mb-20">
+                  <h4 className="tp-service-three-title heading-color-black-with-hover mb-4">
                     <Link to={`/blogs/${el.slug}`}>{el.title}</Link>
                   </h4>
                 </div>
@@ -63,7 +57,7 @@ const BlogList = ({ noOfPost, blogData }) => {
               </div>
             </div>
           </div>
-        </div>
+        
       ))}
 
       {/* Pagination */}

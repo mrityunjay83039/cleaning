@@ -12,14 +12,14 @@ const BlogDetails = () => {
   return (
     <>
       <BreadCrumb breadCrumTitle="Blog Posts" pageName="Blog" />
-      <section className="blog-sidebar-area pt-120 pb-90">
+      <section className="pt-120 pb-90">
         <div className="container">
           <div className="tp-custom-container-box">
             <div className="row">
               <div className="col-lg-9">
                 {blogDetail?.blog && (
                   <>
-                    <div className="blog__details--wrapper mr-50 mb-50">
+                    <div className="blog__details--wrapper">
                       <div className="ablog ablog-4 mb-55">
                         <div className="ablog__img wow fadeInUp">
                           <img
@@ -28,8 +28,8 @@ const BlogDetails = () => {
                             alt="img"
                           />
                         </div>
-                        <div className="ablog__text ablog__text4">
-                          <div className="ablog__meta ablog__meta4">
+                        <div className="ablog__text p-4">
+                          <div className="ablognew__meta">
                             <ul>
                               {/* <li>
                                 <a href="blog-details.html">

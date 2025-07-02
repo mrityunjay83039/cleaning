@@ -12,6 +12,7 @@ import Service from "../../common/service";
 import { serviceList_servicePage } from "../../config/constants";
 import BlogList from "../../common/BlogList";
 import { useGetAllBlogsQuery } from "../../redux/services/blog";
+import BlogListHome from "../../common/BlogListHome";
 
 const HomePage = () => {
   const { data: blogData } = useGetAllBlogsQuery()
@@ -499,7 +500,8 @@ const HomePage = () => {
             </Grid>
           </Grid>
           <Box display="flex" justifyContent="center" gap={2}>
-            <BlogList noOfPost={3} blogData={blogData}/>
+            <BlogListHome noOfPost={3} blogData={blogData} />
+            {/* <BlogList noOfPost={3} blogData={blogData}/> */}
           </Box>
           <Box display="flex" justifyContent="center">
             <Link className="theme-btn" to="/blogs">

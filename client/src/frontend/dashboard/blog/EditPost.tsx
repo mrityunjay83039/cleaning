@@ -77,6 +77,7 @@ const EditPost = () => {
     if (!file) return;
 
     setIsUploading(true);
+    
     try {
       const cloudName = import.meta.env.VITE_CLOUD_NAME;
       const uploadPreset = import.meta.env.VITE_UPLOAD_PRESET;

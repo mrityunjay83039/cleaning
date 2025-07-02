@@ -17,8 +17,8 @@ const Blogs = () => {
           <div className="tp-custom-container-box">
             <div className="row">
               <div className="col-lg-9">
-                <div className="ablog__sidebar--wrapper mr-50">
-                  <BlogList noOfPost="1" blogData={blogData} />
+                <div className="ablog__sidebar--wrapper">
+                  <BlogList noOfPost="10" blogData={blogData} />
                 </div>
               </div>
               <div className="col-lg-3">
